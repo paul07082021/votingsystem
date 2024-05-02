@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\VotersController;
+use App\Http\Controllers\PartylistController;
+use App\Http\Controllers\PositionController;
+use App\Http\Controllers\CandidatesController;
+use App\Http\Controllers\DashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +23,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin');
 });
+
+Route::get('admin', [AdminController::class, 'index']);
+Route::get('partylist', [PartylistController::class, 'index']);
+Route::get('voters', [VotersController::class, 'index']);
+Route::get('position', [PositionController::class, 'index']);
+Route::get('candidates', [CandidatesController::class, 'index']);
+Route::get('dashboard', [DashboardController::class, 'index']);
+
+
+

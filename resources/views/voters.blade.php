@@ -5,7 +5,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Administrator</h3>
+                            <h3 class="mb-0">Voters</h3>
                         </div>
                         <div class="col-sm-6">
                          

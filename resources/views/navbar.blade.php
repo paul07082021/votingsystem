@@ -105,43 +105,38 @@
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
     
                         <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="dashboard" class="nav-link">
                                 <i class="nav-icon fa-regular fa-user text-info"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="admin" class="nav-link">
                                 <i class="nav-icon fa-regular fa-user text-info"></i>
                                 <p>Administrator</p>
                             </a>
                         </li>
+                      
                         <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
-                                <i class="nav-icon fa-regular fa-user text-info"></i>
-                                <p>Voters</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="partylist" class="nav-link">
                                 <i class="nav-icon fa-regular fa-user text-info"></i>
                                 <p>Partylist</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="position" class="nav-link">
                                 <i class="nav-icon fa-regular fa-user text-info"></i>
                                 <p>Position</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="candidates" class="nav-link">
                                 <i class="nav-icon fa-regular fa-user text-info"></i>
                                 <p>Candidates</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="voters" class="nav-link">
                                 <i class="nav-icon fa-regular fa-user text-info"></i>
                                 <p>Voters</p>
                             </a>

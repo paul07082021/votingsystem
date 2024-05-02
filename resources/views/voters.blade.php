@@ -1,5 +1,12 @@
 @include('navbar')
-
+<script>
+  jQuery(document).ready(function($) {
+    $('#tbl').DataTable({     
+        
+    }
+    );
+} );
+</script>
 <main class="app-main">
             <div class="app-content-header">
                 <div class="container-fluid">
@@ -15,7 +22,7 @@
             </div>
             <div class="app-content">
                 <div class="container-fluid">
-                            <div class="card">
+                            <div class="card p-4">
                                 <div class="card-body p-0">
                                     <table id="tbl" class="table">
                                         <thead>

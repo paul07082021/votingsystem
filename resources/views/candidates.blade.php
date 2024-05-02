@@ -1,11 +1,19 @@
 @include('navbar')
-
+<script>
+  jQuery(document).ready(function($) {
+    $('#tbl').DataTable({     
+        
+    }
+    );
+} );
+</script>
 <main class="app-main">
             <div class="app-content-header">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Candidates</h3>
+                            <h3 class="mb-0">Candidates</h3><br>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Candidates</button>
                         </div>
                         <div class="col-sm-6">
                          
@@ -15,23 +23,31 @@
             </div>
             <div class="app-content">
                 <div class="container-fluid">
-                            <div class="card">
+                            <div class="card p-4">
                                 <div class="card-body p-0">
                                     <table id="tbl" class="table">
                                         <thead>
                                             <tr>
-                                                <th>FullName</th>
-                                                <th>Username</th>
-                                                <th>Password</th>
+                                                <th>Image</th>
+                                                <th>Full Name</th>
+                                                <th>Age</th>
+                                                <th>Year/Level</th>
+                                                <th>Course</th>
+                                                <th>Parylist</th>
+                                                <th>Position</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach($admin as $data): ?>
+                                            <?php foreach($candidates as $data): ?>
                                             <tr>
-                                                <td>{{$data['admin_fullname']}}</td>
-                                                <td>U{{$data['admin_username']}}</td>
-                                                <td>{{$data['admin_password']}}</td>  
+                                                <td>{{$data['c_image']}}</td>
+                                                <td>{{$data['c_name']}}</td>
+                                                <td>{{$data['c_age']}}</td>  
+                                                <td>{{$data['c_yearlevel']}}</td>
+                                                <td>{{$data['c_course']}}</td>
+                                                <td>{{$data['c_partylist']}}</td>
+                                                <td>{{$data['c_position']}}</td>
                                                 <td><button type="button" class="btn btn-primary">Update</button>
                                                 <button type="button" class="btn btn-danger">Delete</button></td>                       
                                             </tr>
@@ -46,6 +62,65 @@
                    
         </main>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+        <div class="mb-3">
+            <label for="fullname" class="form-label">Image</label>
+            <input type="file" class="form-control" id="fullname" placeholder="Enter your fullname">
+          </div>
+          <div class="mb-3">
+            <label for="fullname" class="form-label">Fullname</label>
+            <input type="text" class="form-control" id="fullname" placeholder="Enter your fullname">
+          </div>
+          <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input type="number" class="form-control" id="age" placeholder="Enter your age">
+          </div>
+          <div class="mb-3">
+            <label for="year" class="form-label">Year/Level</label>
+            <input type="text" class="form-control" id="year" placeholder="Enter your year/level">
+          </div>
+          <div class="mb-3">
+            <label for="course" class="form-label">Course</label>
+            <input type="text" class="form-control" id="course" placeholder="Enter your course">
+          </div>
+          <div class="mb-3">
+            <label for="position" class="form-label">Partylist</label>
+            <select class="form-select" aria-label="Default select example">
+            <option selected>-- select Partylist --</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="position" class="form-label">Position</label>
+            <select class="form-select" aria-label="Default select example">
+            <option selected>-- select position --</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

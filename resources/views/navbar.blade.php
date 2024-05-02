@@ -5,13 +5,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Voting System</title>
-    <!--begin::Primary Meta Tags-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="AdminLTE 4 | Simple Tables">
-    <meta name="author" content="ColorlibHQ">
-    <meta name="description" content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS.">
-    <meta name="keywords" content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard">
-    <!--end::Primary Meta Tags-->
     <!--begin::Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +19,14 @@
     <!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="css/adminlte.css">
     <!--end::Required Plugin(AdminLTE)-->
+
+<!-- DATATABLES ---->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
+
+
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -139,6 +140,18 @@
                             <a href="voters" class="nav-link">
                                 <i class="nav-icon fa-regular fa-user text-info"></i>
                                 <p>Voters</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="voters" class="nav-link">
+                                <i class="nav-icon fa-regular fa-user text-info"></i>
+                                <p>Election Title</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="voters" class="nav-link">
+                                <i class="nav-icon fa-regular fa-user text-info"></i>
+                                <p>Election Result</p>
                             </a>
                         </li>
 

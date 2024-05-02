@@ -20,8 +20,8 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin');
+Route::get('login', function () {
+    return view('login');
 });
 
 Route::get('admin', [AdminController::class, 'index']);

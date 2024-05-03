@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VotersModel extends Model
 {
+    public $timestamps = false;
     protected $table = 'tbl_voters';
     protected $fillable = [
         'id',

@@ -46,8 +46,8 @@
                                                 <td>{{$data['c_age']}}</td>  
                                                 <td>{{$data['c_yearlevel']}}</td>
                                                 <td>{{$data['c_course']}}</td>
-                                                <td>{{$data['c_partylist']}}</td>
-                                                <td>{{$data['c_position']}}</td>
+                                                <td>{{$data['par_name']}}</td>
+                                                <td>{{$data['po_name']}}</td>
                                                 <td><button type="button" class="btn btn-primary">Update</button>
                                                 <button type="button" class="btn btn-danger">Delete</button></td>                       
                                             </tr>

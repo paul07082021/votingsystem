@@ -25,6 +25,11 @@ Route::get('login', function () {
     return view('login');
 });
 
+Route::get('login-voters', function () {
+    return view('voterscreen');
+});
+
+
 Route::get('admin', [AdminController::class, 'index']);
 Route::get('partylist', [PartylistController::class, 'index']);
 Route::get('voters', [VotersController::class, 'index']);

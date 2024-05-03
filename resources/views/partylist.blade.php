@@ -65,18 +65,19 @@
         </button>
       </div>
       <div class="modal-body">
-      <form>
+      <form method="POST" action="addparty">
+        @csrf
           <div class="mb-3">
             <label for="fullname" class="form-label">Partylist Name</label>
-            <input type="text" class="form-control" id="fullname" placeholder="Enter your Partylist Name" required>
+            <input type="text" class="form-control" name="partyname" placeholder="Enter your Partylist Name" required>
           </div>
           <div class="mb-3">
             <label for="username" class="form-label">Image/Logo</label>
-            <input type="file" class="form-control" id="username" placeholder="Enter your username" required>
+            <input type="file" class="form-control" name="image" placeholder="Enter your username" required>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Description</label>
-            <input type="text" class="form-control" id="password" placeholder="Enter your description" required>
+            <input type="text" class="form-control" name="desc" placeholder="Enter your description" required>
           </div>
       
       </div>

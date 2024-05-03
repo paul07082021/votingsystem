@@ -62,14 +62,15 @@
             </button>
         </div>
         <div class="modal-body">
-        <form>
+        <form method="POST" action="addpos">
+            @csrf
             <div class="mb-3">
                 <label for="fullname" class="form-label">Position</label>
-                <input type="text" class="form-control" id="fullname" placeholder="Enter Position" required>
+                <input type="text" class="form-control" name="position" placeholder="Enter Position" required>
             </div>
             <div class="mb-3">
                 <label for="username" class="form-label">Maximum Vote</label>
-                <input type="number" class="form-control" id="username" placeholder="Enter max vote" required>
+                <input type="number" class="form-control" name="maxvote" placeholder="Enter max vote" required>
             </div>
           
         

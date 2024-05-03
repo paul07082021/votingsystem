@@ -22,4 +22,20 @@ class PartylistController extends Controller
         $this->data['data'] = $this->party->get();
         return view('partylist', $this->data);
     }
+
+    public function add(Request $request)
+    {
+        if($request->isMethod('post')){
+            $partyname = $request->input('partyname');
+            $image = $request->input('image');
+            $desc = $request->input('desc');
+
+            $addparty = $this->party->insertGetId([
+                'par_name' => $partyname, 
+                'par_logo' => $image, 
+                'par_desc' => $desc,
+            ]);
+        }
+        return back();
+    }
 }

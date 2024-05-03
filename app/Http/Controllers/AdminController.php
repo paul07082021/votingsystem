@@ -19,4 +19,20 @@ class AdminController extends Controller
         $this->data['admin'] = $this->admin->get();
         return view('admin', $this->data);
     }
+
+    public function add(Request $request)
+    {
+        if($request->isMethod('post')){
+            $fullname = $request->input('fullname');
+            $username = $request->input('username');
+            $password = $request->input('password');
+
+            $addadmin = $this->admin->insertGetId([
+                'admin_fullname' => $fullname, 
+                'admin_username' => $username, 
+                'admin_password' => $password,
+            ]);
+        }
+        return back();
+    }
 }

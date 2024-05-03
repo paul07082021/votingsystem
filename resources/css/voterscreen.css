@@ -1,0 +1,181 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#student-desktop{
+    margin-right:30px;
+}
+#student-mobile{
+    display:none;
+}
+.mobile{
+    display:none;
+    text-decoration: none;
+    background: #b00606;
+    color:#fff;
+    
+}
+.desktop{
+    text-decoration: none;
+    background: #b00606;
+    color:#fff;
+}
+.desktop:hover,
+.desktop:focus,
+.mobile:hover,
+.mobile:focus{
+    text-decoration: none;
+    background: #b00606;
+    color:#fff;
+}
+.voters{
+    padding:30px 25px;
+}
+.voters-header{
+    text-align: center;
+    padding-bottom:5px;
+}
+
+.partylist{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    align-items: flex-start;
+    gap:3px 15px;
+}
+.form-check-input{
+    border:2px solid #313131;
+}
+
+.candidate-list{
+    margin-top:30px;
+    padding:25px 30px;
+    border:1px solid #313131;
+    border-radius: 3px;
+}
+div.candidate{
+    border:2px solid rgb(7, 7, 35);
+    padding:20px 25px;
+    margin-bottom:15px;
+    border-radius: 3px;
+}
+div.candidate img{
+    height:80px;
+}
+div.candidate .form-check-input{
+    margin-top:40px;
+    margin-left:15px;
+    margin-right:20px;
+    border:2px solid #313131;
+    border-radius:2px;
+}
+
+label.candidate-label{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.candidate p{
+    margin:0;
+}
+
+.for-view-button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:15px;
+}
+.for-view-button .btn{
+    margin-top:20px;
+}
+.modal-footer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.modal-body p{
+    margin: 0;
+}
+.modal-footer button{
+    width: 48%;
+}
+@media(max-width:998px){
+#student-mobile,
+.mobile{
+    display:block;
+}
+.desktop,
+#student-desktop{
+    display:none;
+}
+}
+
+@media(max-width:600px){
+.mobile,
+#student-mobile{
+   font-size:14px;
+}
+.partylist{
+    gap:5px 4px;
+}
+
+.form-check{
+    margin:0;
+}
+.form-check label{
+    font-size:15px;
+}
+
+
+div.candidate{
+    padding:20px 25px;
+}
+div.candidate .form-check-input{
+    margin-top:30px;
+    margin-left:0;
+    margin-right:20px;
+}
+
+.candidate-details{
+    line-height: 20px;
+}
+
+div.candidate img{
+    height:60px;
+}
+div.candidate p{
+    font-size:12px;
+}
+}
+
+
+@media(max-width:480px){
+    div.candidate{
+    padding:13px 17px;
+}
+
+
+div.candidate img{
+    height:60px;
+}
+div.candidate p{
+    font-size:12px;
+}
+}
+
+@media(max-width:370px){
+    div.candidate{
+    padding:10px 14px;
+}
+
+
+div.candidate img{
+    height:50px;
+}
+div.candidate p{
+    font-size:10px;
+}
+}

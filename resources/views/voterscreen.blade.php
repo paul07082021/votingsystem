@@ -65,7 +65,7 @@
                     <div class="candidate form-check">
                         <input class="form-check-input" type="radio" name="votestraight" id="votestraight3">
                         <label class="candidate-label form-check-label" for="votestraight3">
-                            <img src = "{{ asset('images/school-logo.png') }}">
+                        <img src="resources/images/school-logo.png" alt="Voting System">
                             <p>NICOLE MAMARIL</p>
                             <div class = "candidate-details">
                                 <p>Party List: KVYO</p>
@@ -81,7 +81,7 @@
                     <div class="candidate form-check">
                         <input class="form-check-input" type="radio" name="votestraight" id="votestraight3">
                         <label class="candidate-label form-check-label" for="votestraight3">
-                            <img src = "{{ asset('images/school-logo.png') }}">
+                        <img src="resources/images/school-logo.png" alt="Voting System">
                             <p>NICOLE MAMARIL</p>
                             <div class = "candidate-details">
                                 <p>Party List: KVYO</p>
@@ -105,7 +105,7 @@
                     <div class="candidate form-check">
                         <input class="form-check-input" type="radio" name="votestraight" id="votestraight3">
                         <label class="candidate-label form-check-label" for="votestraight3">
-                            <img src = "{{ asset('images/school-logo.png') }}">
+                        <img src="resources/images/school-logo.png" alt="Voting System">
                             <p>NICOLE MAMARIL</p>
                             <div class = "candidate-details">
                                 <p>Party List: KVYO</p>
@@ -122,7 +122,7 @@
 
         <!--THEN LAHAT NA NG NATIRANG CANDIDATE-->
 
-        
+
         <div class ="for-view-button">
             <button type = "button" class = "btn btn-primary">SUBMIT</button>
             <button type = "button" class = "btn btn-success" data-bs-toggle="modal" data-bs-target="#viewModal">VIEW SUMMARY</button>

@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AdminModel;
 use App\Models\VotersModel;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Support\Str;
 
 class VotersController extends Controller
 {
@@ -30,21 +36,44 @@ class VotersController extends Controller
             $year = $request->input('year');
             $course = $request->input('course');
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $pass = '';
-            $length = 8; 
-            
-            for ($i = 0; $i < $length; $i++) {
-                $pass .= $characters[rand(0, strlen($characters) - 1)];
-            }
-            
+            $password = Str::random(8); 
             $addvoters = $this->voters->insertGetId([
                 'stud_id' => $studid,
                 'stud_fullname' => $fullname,
                 'stud_year' => $year ,
                 'stud_course' => $course,
-                'stud_pass' => $pass
+                'stud_pass' => $password
             ]);
         }
         return back();
     }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'excel_file' => 'required|mimes:xlsx,xls'
+        ]);
+        $password = Str::random(8); 
+        $file = $request->file('excel_file');
+        $spreadsheet = IOFactory::load($file);
+        $sheet = $spreadsheet->getActiveSheet();
+        $highestRow = $sheet->getHighestRow();
+        $highestColumn = $sheet->getHighestColumn();
+        $data = [];
+        for ($row = 2; $row <= $highestRow; $row++) {
+            $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
+            $addvoters = $this->voters->insertGetId([
+                'stud_id' => $rowData[0][0],
+                'stud_fullname' => $rowData[0][1],
+                'stud_year' => $rowData[0][2],
+                'stud_course' => $rowData[0][3],
+                'stud_pass' => $password
+            ]);
+            if ($addvoters) {
+                $data[] = $rowData[0]; 
+            }
+        }
+        return back();
+    }
+           
 }

@@ -14,7 +14,7 @@
                         <div class="col-sm-6">
                             <h3 class="mb-0">Voters</h3><br>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Voters</button>
-
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal1">Import</button>
                         </div>
                         <div class="col-sm-6">
                          
@@ -66,7 +66,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Partylist</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Voters</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -94,6 +94,35 @@
             <label for="password" class="form-label">Voter's Pass</label>
             <input type="text" class="form-control" name="pass" placeholder="please enter" >
           </div>
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Import Voters</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" action="importvoters" enctype="multipart/form-data">
+        @csrf
+          <div class="mb-3">
+            <label for="fullname" class="form-label">Import Excel File</label>
+            <input type="file" class="form-control" name="excel_file"  required>
+          </div>
+          <a href="assets/img/template.xlsx" download>Download Template</a>
       
       </div>
       <div class="modal-footer">

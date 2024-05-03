@@ -143,13 +143,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="voters" class="nav-link">
+                            <a href="election" class="nav-link">
                                 <i class="nav-icon fa-regular fa-user text-info"></i>
                                 <p>Election Title</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="voters" class="nav-link">
+                            <a href="electionresult" class="nav-link">
                                 <i class="nav-icon fa-regular fa-user text-info"></i>
                                 <p>Election Result</p>
                             </a>

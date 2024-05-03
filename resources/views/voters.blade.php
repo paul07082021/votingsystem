@@ -116,12 +116,13 @@
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="addvoters">
+      <form method="POST" action="importvoters" enctype="multipart/form-data">
         @csrf
           <div class="mb-3">
             <label for="fullname" class="form-label">Import Excel File</label>
-            <input type="file" class="form-control" name="excel" placeholder="please enter" required>
+            <input type="file" class="form-control" name="excel_file"  required>
           </div>
+          <a href="assets/img/template.xlsx" download>Download Template</a>
       
       </div>
       <div class="modal-footer">

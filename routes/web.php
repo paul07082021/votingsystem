@@ -7,6 +7,7 @@ use App\Http\Controllers\PartylistController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\CandidatesController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ElectionController;
 
 
 /*
@@ -30,7 +31,8 @@ Route::get('voters', [VotersController::class, 'index']);
 Route::get('position', [PositionController::class, 'index']);
 Route::get('candidates', [CandidatesController::class, 'index']);
 Route::get('dashboard', [DashboardController::class, 'index']);
-
+Route::get('election', [ElectionController::class, 'index']);
+Route::get('electionresult', [ElectionController::class, 'result']);
 
 
 Route::post('addadmin', [AdminController::class, 'add']);

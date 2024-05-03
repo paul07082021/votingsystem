@@ -50,7 +50,6 @@ class VotersController extends Controller
 
     public function import(Request $request)
     {
-        
         $request->validate([
             'excel_file' => 'required|mimes:xlsx,xls'
         ]);

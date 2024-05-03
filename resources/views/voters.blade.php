@@ -72,27 +72,27 @@
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="addparty">
+      <form method="POST" action="addvoters">
         @csrf
           <div class="mb-3">
             <label for="fullname" class="form-label">Student ID</label>
-            <input type="text" class="form-control" name="partyname" placeholder="please enter" required>
+            <input type="text" class="form-control" name="studid" placeholder="please enter" required>
           </div>
           <div class="mb-3">
             <label for="username" class="form-label">FullName</label>
-            <input type="text" class="form-control" name="image" placeholder="please enter" required>
+            <input type="text" class="form-control" name="fullname" placeholder="please enter" required>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Year/Level</label>
-            <input type="text" class="form-control" name="desc" placeholder="please enter" required>
+            <input type="text" class="form-control" name="year" placeholder="please enter" required>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Course</label>
-            <input type="text" class="form-control" name="desc" placeholder="please enter" required>
+            <input type="text" class="form-control" name="course" placeholder="please enter" required>
           </div>  
-          <div class="mb-3">
+          <div class="mb-3" hidden>
             <label for="password" class="form-label">Voter's Pass</label>
-            <input type="text" class="form-control" name="desc" placeholder="please enter" required>
+            <input type="text" class="form-control" name="pass" placeholder="please enter" >
           </div>
       
       </div>

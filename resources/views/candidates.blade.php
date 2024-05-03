@@ -73,51 +73,53 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form method="POST" action="addcandidates">
+          @csrf
         <div class="mb-3">
             <label for="fullname" class="form-label">Image</label>
-            <input type="file" class="form-control" id="fullname" placeholder="Enter your fullname">
+            <input type="file" class="form-control" name="image" placeholder="Enter your fullname">
           </div>
           <div class="mb-3">
             <label for="fullname" class="form-label">Fullname</label>
-            <input type="text" class="form-control" id="fullname" placeholder="Enter your fullname">
+            <input type="text" class="form-control" name="fullname" placeholder="Enter your fullname">
           </div>
           <div class="mb-3">
             <label for="age" class="form-label">Age</label>
-            <input type="number" class="form-control" id="age" placeholder="Enter your age">
+            <input type="number" class="form-control" name="age" placeholder="Enter your age">
           </div>
           <div class="mb-3">
             <label for="year" class="form-label">Year/Level</label>
-            <input type="text" class="form-control" id="year" placeholder="Enter your year/level">
+            <input type="text" class="form-control" name="year" placeholder="Enter your year/level">
           </div>
           <div class="mb-3">
             <label for="course" class="form-label">Course</label>
-            <input type="text" class="form-control" id="course" placeholder="Enter your course">
+            <input type="text" class="form-control" name="course" placeholder="Enter your course">
           </div>
           <div class="mb-3">
             <label for="position" class="form-label">Partylist</label>
-            <select class="form-select" aria-label="Default select example">
-            <option selected>-- select Partylist --</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <select class="form-select" name="party" aria-label="Default select example">
+            <option value="">-- select Partylist --</option>
+            <?php foreach($party as $dparty):?>
+            <option value="{{$dparty['par_id']}}">{{$dparty['par_name']}}</option>
+            <?php endforeach; ?>
             </select>
           </div>
           <div class="mb-3">
             <label for="position" class="form-label">Position</label>
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" name="position" aria-label="Default select example">
             <option selected>-- select position --</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <?php foreach($position as $position):?>
+            <option value="{{$position['po_id']}}">{{$position['po_name']}}</option>
+            <?php endforeach; ?>
             </select>
           </div>
-        </form>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Sign Up</button>
+        <button type="submit" class="btn btn-primary">Add</button>
       </div>
+      </form>
     </div>
   </div>
 </div>

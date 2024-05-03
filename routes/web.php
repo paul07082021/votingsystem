@@ -36,3 +36,5 @@ Route::get('dashboard', [DashboardController::class, 'index']);
 Route::post('addadmin', [AdminController::class, 'add']);
 Route::post('addparty', [PartylistController::class, 'add']);
 Route::post('addpos', [PositionController::class, 'add']);
+Route::post('addvoters', [VotersController::class, 'add']);
+Route::post('addcandidates', [CandidatesController::class, 'add']);

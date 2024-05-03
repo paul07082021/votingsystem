@@ -20,6 +20,7 @@ class PartylistController extends Controller
     public function index()
     {
         $this->data['data'] = $this->party->get();
+        $this->data['datas'] = $this->party->get();
         return view('partylist', $this->data);
     }
 
@@ -38,4 +39,22 @@ class PartylistController extends Controller
         }
         return back();
     }
+
+    public function update(Request $request)
+    {
+        if($request->isMethod('post')){
+            $partyname = $request->input('partyname');
+            $image = $request->input('image');
+            $desc = $request->input('desc');
+            $id = $request->input('id');
+    
+            $this->party->where('par_id', $id)->update([
+                'par_name' => $partyname, 
+                'par_logo' => $image, 
+                'par_desc' => $desc,
+            ]);
+        }
+        return back();
+    }
+    
 }

@@ -35,7 +35,6 @@ class VotersController extends Controller
             $fullname = $request->input('fullname');
             $year = $request->input('year');
             $course = $request->input('course');
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $password = Str::random(8); 
             $addvoters = $this->voters->insertGetId([
                 'stud_id' => $studid,
@@ -75,5 +74,27 @@ class VotersController extends Controller
         }
         return back();
     }
+
+    public function update(Request $request)
+    {
+        if($request->isMethod('post')){
+            $studid = $request->input('studid');
+            $fullname = $request->input('fullname');
+            $year = $request->input('year');
+            $course = $request->input('course');
+            $pass = $request->input('pass');
+            $id = $request->input('id');
+    
+            $this->voters->where('id', $id)->update([
+                'stud_id' => $studid,
+                'stud_fullname' => $fullname,
+                'stud_year' => $year ,
+                'stud_course' => $course,
+                'stud_pass' => $pass
+            ]);
+        }
+        return back();
+    }
+    
            
 }

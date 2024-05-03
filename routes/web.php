@@ -25,6 +25,11 @@ Route::get('login', function () {
     return view('login');
 });
 
+Route::get('login-voters', function () {
+    return view('voterscreen');
+});
+
+
 Route::get('admin', [AdminController::class, 'index']);
 Route::get('partylist', [PartylistController::class, 'index']);
 Route::get('voters', [VotersController::class, 'index']);
@@ -36,9 +41,16 @@ Route::get('electionresult', [ElectionController::class, 'result']);
 
 
 Route::post('addadmin', [AdminController::class, 'add']);
+Route::post('updateadmin', [AdminController::class, 'update']);
+
 Route::post('addparty', [PartylistController::class, 'add']);
+Route::post('updateparty', [PartylistController::class, 'update']);
+
 Route::post('addpos', [PositionController::class, 'add']);
+Route::post('updatepos', [PositionController::class, 'update']);
 Route::post('addvoters', [VotersController::class, 'add']);
+Route::post('updatevoters', [VotersController::class, 'update']);
+
 Route::post('addcandidates', [CandidatesController::class, 'add']);
 
 Route::post('importvoters', [VotersController::class, 'import']);

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PartyModel extends Model
 {
+    public $timestamps = false;
     protected $table = 'tbl_partylist';
     protected $fillable = [
         'par_id',

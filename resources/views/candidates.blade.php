@@ -48,7 +48,7 @@
                                                 <td>{{$data['c_course']}}</td>
                                                 <td>{{$data['par_name']}}</td>
                                                 <td>{{$data['po_name']}}</td>
-                                                <td><button type="button" class="btn btn-primary">Update</button>
+                                                <td><button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#update{{$data['c_id']}}">Update</button>
                                                 <button type="button" class="btn btn-danger">Delete</button></td>                       
                                             </tr>
                                              <?php endforeach; ?>      
@@ -124,6 +124,67 @@
   </div>
 </div>
 
+
+
+<!-- Update Modal -->
+<?php foreach($candidates as $data): ?>
+<div class="modal fade" id="update{{$data['c_id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="addcandidates">
+          @csrf
+        <div class="mb-3">
+            <label for="fullname" class="form-label">Image</label>
+            <input type="file" class="form-control" name="image" placeholder="Enter your fullname">
+          </div>
+          <div class="mb-3">
+            <label for="fullname" class="form-label">Fullname</label>
+            <input type="text" class="form-control" name="fullname" placeholder="Enter your fullname">
+          </div>
+          <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input type="number" class="form-control" name="age" placeholder="Enter your age">
+          </div>
+          <div class="mb-3">
+            <label for="year" class="form-label">Year/Level</label>
+            <input type="text" class="form-control" name="year" placeholder="Enter your year/level">
+          </div>
+          <div class="mb-3">
+            <label for="course" class="form-label">Course</label>
+            <input type="text" class="form-control" name="course" placeholder="Enter your course">
+          </div>
+          <div class="mb-3">
+            <label for="position" class="form-label">Partylist</label>
+            <select class="form-select" name="party" aria-label="Default select example">
+            <option value="">-- select Partylist --</option>
+            
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="position" class="form-label">Position</label>
+            <select class="form-select" name="position" aria-label="Default select example">
+            <option selected>-- select position --</option>
+       
+            </select>
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>      
 
 
 @include('footer')

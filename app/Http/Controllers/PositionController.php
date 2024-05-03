@@ -36,4 +36,19 @@ class PositionController extends Controller
         }
         return back();
     }
+    public function update(Request $request)
+    {
+        if($request->isMethod('post')){
+            $position = $request->input('position');
+            $maxvote = $request->input('maxvote');
+            $id = $request->input('id');
+    
+            $this->position->where('po_id', $id)->update([
+                'po_name' => $position, 
+                'po_max_vote' => $maxvote, 
+            ]);
+        }
+        return back();
+    }
+    
 }

@@ -11,15 +11,21 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Str;
+use App\Models\PositionModel;
+use App\Models\PartyModel;
+use App\Models\CandidatesModel;
+
+
 
 class VotersController extends Controller
 {
-    public function __construct() {
-
+    public function __construct() 
+    {
+        $this->position = new PositionModel;
+        $this->candidates = new CandidatesModel;
         $this->admin = new AdminModel;
         $this->voters = new VotersModel;
         $this->data = array();
-
     }
 
     public function index()
@@ -95,6 +101,19 @@ class VotersController extends Controller
             ]);
         }
         return back();
+    }
+
+    public function voterscreen()
+    {
+        if (!session()->has('name')) {return redirect(url('login')); }
+        $this->data['voters'] = $this->voters->get();
+
+        $this->data['candidates'] = $this->position->get();
+        print_r(json_encode($this->data['candidates']));
+        die();
+
+
+        return view('voterscreen', $this->data);
     }
     
            

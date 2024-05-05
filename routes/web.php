@@ -44,6 +44,10 @@ Route::get('login', [LoginController::class, 'index']);
 Route::post('loginadmin', [LoginController::class, 'loginadmin']);
 Route::get('logoutadmin', [LoginController::class, 'logoutadmin']);
 
+Route::get('voterslogin', [LoginController::class, 'viewloginvoters']);
+Route::post('loginvoters', [LoginController::class, 'loginvoters']);
+
+
 
 
 Route::post('addadmin', [AdminController::class, 'add']);
@@ -60,3 +64,5 @@ Route::post('updatevoters', [VotersController::class, 'update']);
 Route::post('addcandidates', [CandidatesController::class, 'add']);
 
 Route::post('importvoters', [VotersController::class, 'import']);
+Route::get('voterscreen', [VotersController::class, 'voterscreen']);
+

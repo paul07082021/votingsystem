@@ -12,17 +12,21 @@
         <div class="login-left">
             <h2>LOGIN AS VOTER</h2>
             <p>Cyber Balot</p>
-            <form>
+            @if(session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
+            <form method="POST" action="loginvoters">
+                @csrf
                 <div class = "login-item">
-                    <label for = "username" style = "margin-right:3px;">Username:</label>
-                    <input type = "text" name = "username" class="form-control"/>
+                    <label for = "username" style = "margin-right:3px;">StudentID:</label>
+                    <input type = "text" name = "username" class="form-control" required/>
                 </div>
                 <div class = "login-item">
                     <label for = "password">Password:&nbsp;</label>
-                    <input type = "password" name = "password" class="form-control"/>
+                    <input type = "password" name = "password" class="form-control" required/>
                 </div>
                 <div class = "for-btn">
-                    <button type = "button" class = "btn">SIGN IN</button>
+                    <button type = "submit" class = "btn">SIGN IN</button>
                 </div>
             </form>
         </div>

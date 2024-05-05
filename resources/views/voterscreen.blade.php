@@ -24,20 +24,21 @@
       </nav>
     <div class ="voters container-fluid">
         <div class = "voters-header" >
-            <h3>ELECTION TITLE</h3>
+            <h3>{{$elec['elec_name']}}</h3>
         </div>
         <div class = "vote-straight">
             <h6>VOTE STRAIGHT</h6>
-            <form>
+            <form method="POST" action="">
+                @csrf
                 <div class = "partylist">
-                    <!--DITO ILALAGAY YUNG QUERY PARA SA PAG DISPLAY NG LAHAT NG PARTY LIST-->
+                    <?php foreach($party as $party):?>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="votestraight" id="votestraight1">
                         <label class="form-check-label" for="votestraight1">
-                        PULANG ARAW
+                        {{$party['par_name']}}
                         </label>
                     </div>
-                    <!-- END -->
+                    <?php endforeach; ?>
 
                 </div>
                 <div>

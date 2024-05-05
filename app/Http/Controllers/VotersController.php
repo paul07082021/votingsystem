@@ -29,6 +29,7 @@ class VotersController extends Controller
         $this->admin = new AdminModel;
         $this->voters = new VotersModel;
         $this->election = new ElectionModel;
+        $this->party = new PartyModel;
         $this->data = array();
     }
 
@@ -110,6 +111,12 @@ class VotersController extends Controller
     public function voterscreen()
     {
         if (!session()->has('name')) {return redirect(url('login')); }
+
+        $election = $this->election->get();
+        $elecId = $election->max('elec_id');
+        $this->data['elec'] = $this->election->where('elec_id',$elecId)->first();
+        $this->data['party'] = $this->party->get();
+
         $this->data['voters'] = $this->voters->get();
         $this->data['positions'] = $positions = $this->position->get();
         $this->data['candidates'] = $this->candidates->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
@@ -122,13 +129,14 @@ class VotersController extends Controller
     {
         if ($request->isMethod('post')) {
             $positions = $request->input('positions');
-    
+            $election = $this->election->get();
+            $elecId = $election->max('elec_id');
             foreach ($positions as $position_id => $candidates) {
                 foreach ($candidates as $candidate_id) {
                     $candidate = $this->candidates->where('c_id', $candidate_id)->first();
                     if($candidate) {
                         $addvote = $this->vote->insertGetId([
-                            'v_election_id' => 1, 
+                            'v_election_id' => $elecId, 
                             'v_studid' => $request->input('studid'), 
                             'v_studentname' => $request->input('studentname'), 
                             'v_candidate_voted' => $candidate_id, 

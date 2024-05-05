@@ -39,7 +39,7 @@
                                             <?php foreach($data as $data): ?>
                                             <tr>
                                                 <td>{{$data['par_name']}}</td>
-                                                <td>{{$data['par_logo']}}</td>
+                                                <td><img src="storage/app/assets/img/{{$data['par_logo']}}" height="50" width="50"></td>
                                                 <td>{{$data['par_desc']}}</td>  
                                                 <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update{{$data['par_id']}}">Update</button>
                                                 <button type="button" class="btn btn-danger">Delete</button></td>                       
@@ -53,7 +53,6 @@
                 </div>
         </main>
 
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -65,7 +64,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="addparty">
+      <form method="POST" action="addparty" enctype="multipart/form-data">
         @csrf
           <div class="mb-3">
             <label for="fullname" class="form-label">Partylist Name</label>

@@ -41,7 +41,7 @@
                                         <tbody>
                                             <?php foreach($candidates as $data): ?>
                                             <tr>
-                                                <td>{{$data['c_image']}}</td>
+                                                <td><img src="storage/app/assets/img/{{$data['c_image']}}" height="50" width="50"></td>
                                                 <td>{{$data['c_name']}}</td>
                                                 <td>{{$data['c_age']}}</td>  
                                                 <td>{{$data['c_yearlevel']}}</td>
@@ -73,7 +73,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="addcandidates">
+        <form method="POST" action="addcandidates" enctype="multipart/form-data">
           @csrf
         <div class="mb-3">
             <label for="fullname" class="form-label">Image</label>

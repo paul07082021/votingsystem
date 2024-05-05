@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AdminModel;
 use App\Models\PartyModel;
+use Illuminate\Support\Facades\Storage;
 
 
 class PartylistController extends Controller
@@ -25,21 +26,30 @@ class PartylistController extends Controller
         return view('partylist', $this->data);
     }
 
+
     public function add(Request $request)
     {
         if($request->isMethod('post')){
             $partyname = $request->input('partyname');
-            $image = $request->input('image');
             $desc = $request->input('desc');
-
+    
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time().'.'.$image->getClientOriginalExtension();
+                $image->storeAs('assets/img', $imageName); 
+            } else {
+                $imageName = "no image";
+            }
+      
             $addparty = $this->party->insertGetId([
                 'par_name' => $partyname, 
-                'par_logo' => $image, 
+                'par_logo' => $imageName, 
                 'par_desc' => $desc,
             ]);
         }
         return back();
     }
+    
 
     public function update(Request $request)
     {

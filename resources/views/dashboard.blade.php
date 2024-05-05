@@ -16,7 +16,7 @@
                                     <h3>{{$totalpos}}</h3>
                                     <p>No of Positions</p>
                                 </div>
-                                <a href="#" class="small-box-footer">
+                                <a href="position" class="small-box-footer">
                                     More info <i class="fa-solid fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -32,7 +32,7 @@
                                     <p>No of Candidates</p>
                                 </div>
                               
-                                <a href="#" class="small-box-footer">
+                                <a href="candidates" class="small-box-footer">
                                     More info <i class="fa-solid fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -48,7 +48,7 @@
                                     <p>Total Voters</p>
                                 </div>
                               
-                                <a href="#" class="small-box-footer">
+                                <a href="voters" class="small-box-footer">
                                     More info <i class="fa-solid fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -62,7 +62,7 @@
                                     <h3>{{$totalvoted}}</h3>
                                     <p>Voter's Voted</p>
                                 </div>
-                                <a href="#" class="small-box-footer">
+                                <a href="electionresult" class="small-box-footer">
                                     More info <i class="fa-solid fa-arrow-circle-right"></i>
                                 </a>
                             </div>

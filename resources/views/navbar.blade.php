@@ -54,13 +54,13 @@
                     <!--begin::User Menu Dropdown-->
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img src="assets/img/user2-160x160.jpg" class="user-image rounded-circle shadow" alt="User Image">
+                            <img src="https://www.clipartkey.com/mpngs/m/152-1520367_user-profile-default-image-png-clipart-png-download.png" class="user-image rounded-circle shadow" alt="User Image">
                             <span class="d-none d-md-inline"><?php echo session('name'); ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                             <!--begin::User Image-->
                             <li class="user-header text-bg-primary">
-                                <img src="assets/img/user2-160x160.jpg" class="rounded-circle shadow" alt="User Image">
+                                <img src="https://www.clipartkey.com/mpngs/m/152-1520367_user-profile-default-image-png-clipart-png-download.png" class="rounded-circle shadow" alt="User Image">
 
                                 <p>
                                 <?php echo session('name'); ?>
@@ -70,8 +70,7 @@
                             <!--end::User Image-->
                             <!--begin::Menu Footer-->
                             <li class="user-footer">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                <a href="logoutadmin" class="btn btn-default btn-flat float-end">Sign out</a>
+                                <center><a href="logoutadmin" class="btn btn-default btn-flat ">Sign out</a></center>
                             </li>
                             <!--end::Menu Footer-->
                         </ul>

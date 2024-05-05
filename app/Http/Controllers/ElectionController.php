@@ -51,4 +51,14 @@ class ElectionController extends Controller
         }
         return back();
     }
+
+    public function reset()
+    {
+        $addpos = $this->election->insertGetId([
+            'elec_name' => "New Election, Please change the name", 
+        ]);        
+        return back();
+    }
+
+
 }

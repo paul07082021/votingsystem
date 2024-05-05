@@ -88,5 +88,6 @@ Route::post('deletevoters', [VotersController::class, 'delete']);
 Route::post('updatecandidates', [CandidatesController::class, 'update']);
 
 
+Route::post('reset', [ElectionController::class, 'reset']);
 
 

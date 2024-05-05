@@ -130,7 +130,7 @@ class VotersController extends Controller
 
         $this->data['voters'] = $this->voters->get();
         $this->data['positions'] = $positions = $this->position->get();
-        $this->data['candidates'] = $this->candidates->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
+        $this->data['candidates'] = $this->candidates->where('c_elec_id', $elecId)->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
         // print_r(json_encode($this->data['candidates']));
         // die();
         return view('voterscreen', $this->data);
@@ -179,32 +179,32 @@ class VotersController extends Controller
         $elecId = $election->max('elec_id');
         
         if ($request->isMethod('post')) {
-             $partyid = $request->input('party');
-             $candidate = $this->candidates->where('c_partylist',$partyid)->get();
-       
-            foreach($candidate as $data){
-                $addvote = $this->vote->insertGetId([
-                    'v_election_id' => $elecId, 
-                    'v_studid' => $request->input('studid'), 
-                    'v_studentname' => $request->input('studentname'), 
-                    'v_candidate_voted' => $data['c_id'], 
-                    'v_position_id' => $data['c_position'], 
-                    'v_partylist_id' => $data['c_partylist']
-                ]);
-            }
-            if($addvote){
-                $this->voters->where('id',$request->input('studid'))->update([
-                    'stud_isvote' => 1, 
-                ]);
-    
-                session()->forget('stud_id');
-                session()->forget('name');
-                return redirect(url('voterslogin'))->with('message', 'Login required!');
-            }
-            
-        }
- 
+            $partyid = $request->input('party');
+            $candidate = $this->candidates->where('c_partylist', $partyid)->get();
+            if($candidate->isNotEmpty()){
+                foreach($candidate as $data){
+                    $addvote = $this->vote->insertGetId([
+                        'v_election_id' => $elecId, 
+                        'v_studid' => $request->input('studid'), 
+                        'v_studentname' => $request->input('studentname'), 
+                        'v_candidate_voted' => $data->c_id, 
+                        'v_position_id' => $data->c_position, 
+                        'v_partylist_id' => $data->c_partylist
+                    ]);
+                }
+                if(isset($addvote)){
+                    $this->voters->where('id', $request->input('studid'))->update([
+                        'stud_isvote' => 1, 
+                    ]);
 
+                    session()->forget('stud_id');
+                    session()->forget('name');
+                    return redirect(url('voterslogin'))->with('message', 'Login required!');
+                }
+            } else {
+                return back()->with('error', 'No candidate found for the selected party!');
+            }
+        }
     }
 
 

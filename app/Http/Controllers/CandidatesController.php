@@ -29,6 +29,11 @@ class CandidatesController extends Controller
         $this->data['candidates'] = $this->candidates->where('c_elec_id',$elecId)->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
         $this->data['position'] = $this->position->get();
         $this->data['party'] = $this->party->get();
+
+
+
+        $this->data['positions'] = $this->position->get();
+        $this->data['partys'] = $this->party->get();
         return view('candidates', $this->data);
     }
 
@@ -75,5 +80,30 @@ class CandidatesController extends Controller
         }
         return back();
     }
+
+    public function update(Request $request)
+    {
+        if($request->isMethod('post')){
+            $candidate = $this->candidates->where('c_id', $request->input('c_id'))->update([
+                'c_name' => $request->input('fullname'),
+                'c_age' => $request->input('age'),
+                'c_yearlevel' => $request->input('year'),
+                'c_course' => $request->input('course'),
+                'c_partylist' => $request->input('party'),
+                'c_position' => $request->input('position')
+            ]);
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time().'.'.$image->getClientOriginalExtension();
+                $image->storeAs('assets/img', $imageName); 
+                $this->candidates->where('c_id', $request->input('c_id'))->update(['c_image' => $imageName]);
+            }
+        }
+        return back();
+    }
+
+    
+    
     
 }

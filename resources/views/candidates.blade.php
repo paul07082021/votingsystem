@@ -132,51 +132,57 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Update Candidate</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="addcandidates">
+        <form method="POST" action="updatecandidates" enctype="multipart/form-data">
           @csrf
-        <div class="mb-3">
-            <label for="fullname" class="form-label">Image</label>
-            <input type="file" class="form-control" name="image" placeholder="Enter your fullname">
+          <input type="hidden" name="c_id" value="{{ $data['c_id'] }}">
+          <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" name="image">
           </div>
           <div class="mb-3">
             <label for="fullname" class="form-label">Fullname</label>
-            <input type="text" class="form-control" name="fullname" placeholder="Enter your fullname">
+            <input type="text" class="form-control" name="fullname" value="{{ $data['c_name'] }}">
           </div>
           <div class="mb-3">
             <label for="age" class="form-label">Age</label>
-            <input type="number" class="form-control" name="age" placeholder="Enter your age">
+            <input type="number" class="form-control" name="age" value="{{ $data['c_age'] }}">
           </div>
           <div class="mb-3">
             <label for="year" class="form-label">Year/Level</label>
-            <input type="text" class="form-control" name="year" placeholder="Enter your year/level">
+            <input type="text" class="form-control" name="year" value="{{ $data['c_yearlevel'] }}">
           </div>
           <div class="mb-3">
             <label for="course" class="form-label">Course</label>
-            <input type="text" class="form-control" name="course" placeholder="Enter your course">
+            <input type="text" class="form-control" name="course" value="{{ $data['c_course'] }}">
           </div>
           <div class="mb-3">
             <label for="position" class="form-label">Partylist</label>
             <select class="form-select" name="party" aria-label="Default select example">
-            <option value="">-- select Partylist --</option>
-            
+            <option value="{{$data['par_id']}}" selected>{{$data['par_name']}}</option>
+            <?php foreach($partys as $dparty):?>
+            <option value="{{$dparty['par_id']}}">{{$dparty['par_name']}}</option>
+            <?php endforeach; ?>
             </select>
           </div>
           <div class="mb-3">
             <label for="position" class="form-label">Position</label>
             <select class="form-select" name="position" aria-label="Default select example">
-            <option selected>-- select position --</option>
-       
+            <option value="{{$data['po_id']}}" selected>{{$data['po_name']}}</option>
+            <?php foreach($positions as $position):?>
+            <option value="{{$position['po_id']}}">{{$position['po_name']}}</option>
+            <?php endforeach; ?>
             </select>
           </div>
         
       </div>
       <div class="modal-footer">
+        <input type="hidden" value="{{$data['c_id']}}" name="c_id">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Update</button>
       </div>
@@ -184,6 +190,8 @@
     </div>
   </div>
 </div>
+
+
 
 
 

@@ -7,7 +7,29 @@
     );
 } );
 </script>
+
 <main class="app-main">
+
+@if(session('error'))
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000" style="position: absolute; top: 20px; right: 20px;">
+        <div class="toast-header bg-danger text-white">
+            <strong class="mr-auto">Error</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            {{ session('error') }}
+        </div>
+    </div>
+@endif
+
+<script>
+    $(document).ready(function(){
+        $('.toast').toast('show');
+    });
+</script>
+
             <div class="app-content-header">
                 <div class="container-fluid">
                     <div class="row">

@@ -101,7 +101,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="updateparty">
+      <form method="POST" action="updateparty" enctype="multipart/form-data">
         @csrf
           <div class="mb-3">
             <label for="fullname" class="form-label">Partylist Name</label>
@@ -109,7 +109,7 @@
           </div>
           <div class="mb-3">
             <label for="username" class="form-label">Image/Logo</label>
-            <input type="file" class="form-control" name="image" value="{{$data['par_logo']}}" required>
+            <input type="file" class="form-control" name="image" value="{{$data['par_logo']}}" >
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Description</label>

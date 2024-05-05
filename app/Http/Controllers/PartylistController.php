@@ -55,18 +55,29 @@ class PartylistController extends Controller
     {
         if($request->isMethod('post')){
             $partyname = $request->input('partyname');
-            $image = $request->input('image');
+            $image = $request->hasFile('image');
             $desc = $request->input('desc');
             $id = $request->input('id');
-    
-            $this->party->where('par_id', $id)->update([
-                'par_name' => $partyname, 
-                'par_logo' => $image, 
-                'par_desc' => $desc,
-            ]);
+            if($image){
+                $imageFile = $request->file('image');
+                $imageName = time().'.'.$imageFile->getClientOriginalExtension();
+                $imageFile->storeAs('assets/img', $imageName);
+                $this->party->where('par_id', $id)->update([
+                    'par_name' => $partyname, 
+                    'par_logo' => $imageName, 
+                    'par_desc' => $desc,
+                ]); 
+            } else {
+                $this->party->where('par_id', $id)->update([
+                    'par_name' => $partyname, 
+                    'par_desc' => $desc,
+                ]);
+            }
+         
         }
         return back();
     }
+    
 
 
     

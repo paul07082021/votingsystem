@@ -29,14 +29,28 @@ class PositionController extends Controller
         if($request->isMethod('post')){
             $position = $request->input('position');
             $maxvote = $request->input('maxvote');
-
+    
+            // Check if the position name already exists
+            $existingPosition = $this->position->where('po_name', $position)->first();
+    
+            if ($existingPosition) {
+                return back()->with('error', 'Position name already exists!');
+            }
+    
             $addpos = $this->position->insertGetId([
                 'po_name' => $position, 
                 'po_max_vote' => $maxvote, 
             ]);
+    
+            if($addpos){
+                return back()->with('success', 'Position added successfully!');
+            } else {
+                return back()->with('error', 'Failed to add position!');
+            }
         }
         return back();
     }
+    
     public function update(Request $request)
     {
         if($request->isMethod('post')){

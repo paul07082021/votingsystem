@@ -14,6 +14,8 @@ use Illuminate\Support\Str;
 use App\Models\PositionModel;
 use App\Models\PartyModel;
 use App\Models\CandidatesModel;
+use App\Models\VoteModel;
+
 
 
 
@@ -21,6 +23,7 @@ class VotersController extends Controller
 {
     public function __construct() 
     {
+        $this->vote = new VoteModel;
         $this->position = new PositionModel;
         $this->candidates = new CandidatesModel;
         $this->admin = new AdminModel;
@@ -107,20 +110,38 @@ class VotersController extends Controller
     {
         if (!session()->has('name')) {return redirect(url('login')); }
         $this->data['voters'] = $this->voters->get();
-
-        //$this->data['candidates'] = $this->position->join('tbl_candidates', 'po_id', '=', 'c_position')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
-
-
         $this->data['positions'] = $positions = $this->position->get();
         $this->data['candidates'] = $this->candidates->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
-
-
         // print_r(json_encode($this->data['candidates']));
         // die();
-
-
         return view('voterscreen', $this->data);
     }
+    
+    public function vote(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $positions = $request->input('positions');
+    
+            foreach ($positions as $position_id => $candidates) {
+                foreach ($candidates as $candidate_id) {
+                    $candidate = $this->candidates->where('c_id', $candidate_id)->first();
+                    if($candidate) {
+                        $addvote = $this->vote->insertGetId([
+                            'v_election_id' => 1, 
+                            'v_studid' => $request->input('studid'), 
+                            'v_studentname' => $request->input('studentname'), 
+                            'v_candidate_voted' => $candidate_id, 
+                            'v_position_id' => $position_id, 
+                            'v_partylist_id' => $candidate->c_partylist
+                        ]);
+                    }
+                }
+            }
+        }
+        return back();
+    }
+    
+    
     
            
 }

@@ -47,37 +47,49 @@
         </div>
 
 
-
-        <?php foreach($positions as $pos): ?>
+        <form method="POST" action="vote">
+    @csrf
+    <?php foreach($positions as $pos): ?>
     <!--DITO ILALAGAY YUNG PARA SA <?= $pos['po_name'];?> -->
     <div class="candidate-list bg-body-tertiary">
         <div class="candidate-item">
             <h5><?= $pos['po_name'];?> Max Vote:<?= $pos['po_max_vote'];?></h5>
-            <form>
-                <?php foreach($candidates as $candidate): ?>
-                    <?php if($candidate['c_position'] == $pos['po_id']): ?>
-                        <div class="candidate form-check">
-                            <input class="form-check-input" type="checkbox" name="votestraight<?= $pos['po_id']; ?>[]" id="votestraight<?= $candidate['c_id']; ?>" onchange="limitCheckboxes(this, <?= $pos['po_max_vote']; ?>)">
-                            <label class="candidate-label form-check-label" for="votestraight<?= $candidate['c_id']; ?>">
-                                <img src="resources/images/school-logo.png" alt="Voting System">
-                                <p><?= $candidate['c_name']; ?></p>
-                                <div class="candidate-details">
-                                    <p>Party List: <?= $candidate['par_name']; ?></p>
-                                    <p>Age: <?= $candidate['c_age']; ?></p>
-                                    <p>Year Level: <?= $candidate['c_yearlevel']; ?></p>
-                                    <p>Course: <?= $candidate['c_course']; ?></p>
-                                </div>
-                            </label>
-                        </div>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </form>
+            <?php foreach($candidates as $candidate): ?>
+            <?php if($candidate['c_position'] == $pos['po_id']): ?>
+            <div class="candidate form-check">
+                <input class="form-check-input" type="checkbox" name="positions[<?= $pos['po_id']; ?>][]" id="votestraight<?= $candidate['c_id']; ?>" value="<?= $candidate['c_id']; ?>" onchange="limitCheckboxes(this, <?= $pos['po_max_vote']; ?>)">
+                <label class="candidate-label form-check-label" for="votestraight<?= $candidate['c_id']; ?>">
+                    <img src="resources/images/school-logo.png" alt="Voting System">
+                    <p><?= $candidate['c_name']; ?></p>
+                    <div class="candidate-details">
+                        <p>Party List: <?= $candidate['par_name']; ?></p>
+                        <p>Age: <?= $candidate['c_age']; ?></p>
+                        <p>Year Level: <?= $candidate['c_yearlevel']; ?></p>
+                        <p>Course: <?= $candidate['c_course']; ?></p>
+                    </div>
+                </label>
+            </div>
+            <?php endif; ?>
+            <?php endforeach; ?>
         </div>
     </div>
     <!--END-->
-<?php endforeach; ?>
+    <?php endforeach; ?>
+ 
 
-<script>
+
+        <!--THEN LAHAT NA NG NATIRANG CANDIDATE-->
+
+        <input type="hidden" name="studentname" value="<?php echo session('name'); ?>"> 
+        <input type="hidden" name="studid" value="<?php echo session('stud_id'); ?>">    
+   
+        <div class ="for-view-button">
+            <button type = "submit" class = "btn btn-primary">SUBMIT</button>
+            <button type = "button" class = "btn btn-success" data-bs-toggle="modal" data-bs-target="#viewModal">VIEW SUMMARY</button>
+        </div>
+    </div>
+    </form>
+    <script>
     function limitCheckboxes(checkbox, max) {
         var checkboxes = document.getElementsByName(checkbox.name);
         var checkedCount = 0;
@@ -91,22 +103,6 @@
         }
     }
 </script>
-
-
-
-
-   
-
-        <!--THEN LAHAT NA NG NATIRANG CANDIDATE-->
-
-
-        <div class ="for-view-button">
-            <button type = "button" class = "btn btn-primary">SUBMIT</button>
-            <button type = "button" class = "btn btn-success" data-bs-toggle="modal" data-bs-target="#viewModal">VIEW SUMMARY</button>
-        </div>
-    </div>
-
-  
   <!-- Modal -->
   <div class="modal fade" id="viewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -119,8 +115,6 @@
             <div class="modal-body">
             <p>PRESIDENT: ARROYO</p>
             <p>VICE PRESIDENT: TESTING</p>
-            <p>SECRETARY: DUTERTE</p>
-            <p>TREASURER: MARCOS</p>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-warning">CHANGE</button>

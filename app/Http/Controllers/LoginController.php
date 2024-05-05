@@ -69,7 +69,7 @@ class LoginController extends Controller
                                  ->first();
     
             if ($admin) {   
-                session(['stud_id' => $admin['stud_id'],'name' => $admin['stud_fullname'] ]);
+                session(['stud_id' => $admin['id'],'name' => $admin['stud_fullname'] ]);
                 return redirect(url('voterscreen'));
             } else {
                 return back()->with('error', 'Invalid StudentID or password');

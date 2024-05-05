@@ -66,3 +66,6 @@ Route::post('addcandidates', [CandidatesController::class, 'add']);
 Route::post('importvoters', [VotersController::class, 'import']);
 Route::get('voterscreen', [VotersController::class, 'voterscreen']);
 
+Route::post('vote', [VotersController::class, 'vote']);
+
+

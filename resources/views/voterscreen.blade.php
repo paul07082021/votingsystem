@@ -30,12 +30,15 @@
             <h6>VOTE STRAIGHT</h6>
             <form>
                 <div class = "partylist">
+                    <!--DITO ILALAGAY YUNG QUERY PARA SA PAG DISPLAY NG LAHAT NG PARTY LIST-->
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="votestraight" id="votestraight1">
                         <label class="form-check-label" for="votestraight1">
                         PULANG ARAW
                         </label>
                     </div>
+                    <!-- END -->
+
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="votestraight" id="votestraight2" checked>
                         <label class="form-check-label" for="votestraight2">
@@ -54,7 +57,7 @@
                 </div>
             </form>
         </div>
-
+        <!--DITO ILALAGAY YUNG PARA SA PRESIDENT -->
         <div class = "candidate-list bg-body-tertiary">
             <div class = "candidate-item">
             <h5>President</h5>
@@ -62,7 +65,7 @@
                     <div class="candidate form-check">
                         <input class="form-check-input" type="radio" name="votestraight" id="votestraight3">
                         <label class="candidate-label form-check-label" for="votestraight3">
-                            <img src = "{{ asset('images/school-logo.png') }}">
+                        <img src="resources/images/school-logo.png" alt="Voting System">
                             <p>NICOLE MAMARIL</p>
                             <div class = "candidate-details">
                                 <p>Party List: KVYO</p>
@@ -78,7 +81,7 @@
                     <div class="candidate form-check">
                         <input class="form-check-input" type="radio" name="votestraight" id="votestraight3">
                         <label class="candidate-label form-check-label" for="votestraight3">
-                            <img src = "{{ asset('images/school-logo.png') }}">
+                        <img src="resources/images/school-logo.png" alt="Voting System">
                             <p>NICOLE MAMARIL</p>
                             <div class = "candidate-details">
                                 <p>Party List: KVYO</p>
@@ -92,7 +95,9 @@
             </div>
             
         </div>
+        <!--END-->
 
+        <!--DITO ILALAGAY YUNG PARA SA VICE PRESIDENT -->
         <div class = "candidate-list bg-body-tertiary">
             <div class = "candidate-item">
             <h5>Vice President</h5>
@@ -100,7 +105,7 @@
                     <div class="candidate form-check">
                         <input class="form-check-input" type="radio" name="votestraight" id="votestraight3">
                         <label class="candidate-label form-check-label" for="votestraight3">
-                            <img src = "{{ asset('images/school-logo.png') }}">
+                        <img src="resources/images/school-logo.png" alt="Voting System">
                             <p>NICOLE MAMARIL</p>
                             <div class = "candidate-details">
                                 <p>Party List: KVYO</p>
@@ -113,6 +118,11 @@
                 </form>
             </div>
         </div>
+        <!-- END -->
+
+        <!--THEN LAHAT NA NG NATIRANG CANDIDATE-->
+
+
         <div class ="for-view-button">
             <button type = "button" class = "btn btn-primary">SUBMIT</button>
             <button type = "button" class = "btn btn-success" data-bs-toggle="modal" data-bs-target="#viewModal">VIEW SUMMARY</button>

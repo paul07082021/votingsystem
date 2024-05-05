@@ -67,9 +67,11 @@ Route::post('importvoters', [VotersController::class, 'import']);
 Route::get('voterscreen', [VotersController::class, 'voterscreen']);
 
 Route::post('vote', [VotersController::class, 'vote']);
+Route::get('votersignout', [LoginController::class, 'logoutvoters']);
 
 
 Route::post('update', [ElectionController::class, 'update']);
 
+Route::post('votestraight', [VotersController::class, 'votestraight']);
 
 

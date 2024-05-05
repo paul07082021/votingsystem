@@ -16,10 +16,10 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             </ul>
             <span id = "student-desktop" ><?php echo session('name'); ?></span>
-            <a class = "desktop btn" href = "#" class="navbar-text">SIGN OUT</a>
+            <a class = "desktop btn" href = "votersignout" class="navbar-text">SIGN OUT</a>
           </div>
           <span id = "student-mobile" >Student Name</span>
-          <a class = "mobile btn" href = "#" class="navbar-text">SIGN OUT</a>
+          <a class = "mobile btn" href = "votersignout" class="navbar-text">SIGN OUT</a>
         </div>
       </nav>
     <div class ="voters container-fluid">
@@ -28,12 +28,12 @@
         </div>
         <div class = "vote-straight">
             <h6>VOTE STRAIGHT</h6>
-            <form method="POST" action="">
+            <form method="POST" action="votestraight">
                 @csrf
                 <div class = "partylist">
                     <?php foreach($party as $party):?>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="votestraight" id="votestraight1">
+                        <input class="form-check-input" type="radio" name="party" id="votestraight1" value="<?= $party['par_id']?>">
                         <label class="form-check-label" for="votestraight1">
                         {{$party['par_name']}}
                         </label>
@@ -42,6 +42,8 @@
 
                 </div>
                 <div>
+                <input type="hidden" name="studentname" value="<?php echo session('name'); ?>"> 
+                  <input type="hidden" name="studid" value="<?php echo session('stud_id'); ?>">    
                     <button type = "submit" class = "btn btn-primary mt-1">SUBMIT</button>
                 </div>
             </form>

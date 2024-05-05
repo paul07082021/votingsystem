@@ -57,6 +57,13 @@ class LoginController extends Controller
         session()->forget('name');
         return redirect(url('login'));
     }
+
+    public function logoutvoters()
+    {
+        session()->forget('stud_id');
+        session()->forget('name');
+        return redirect(url('voterslogin'));
+    }
     
     public function loginvoters(Request $request)
     {

@@ -149,6 +149,34 @@ class VotersController extends Controller
         }
         return back();
     }
+
+    public function votestraight(Request $request)
+    {
+        $election = $this->election->get();
+        $elecId = $election->max('elec_id');
+        if ($request->isMethod('post')) {
+             $partyid = $request->input('party');
+             $candidate = $this->candidates->where('c_id',$partyid)->get();
+            foreach($candidate as $data){
+                $addvote = $this->vote->insertGetId([
+                    'v_election_id' => $elecId, 
+                    'v_studid' => $request->input('studid'), 
+                    'v_studentname' => $request->input('studentname'), 
+                    'v_candidate_voted' => $data['c_id'], 
+                    'v_position_id' => $data['c_position'], 
+                    'v_partylist_id' => $data['c_partylist']
+                ]);
+            }
+        }
+        return back();
+    }
+
+
+
+
+
+
+
     
     public function result()
     {

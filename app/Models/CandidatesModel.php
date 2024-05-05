@@ -16,7 +16,8 @@ class CandidatesModel extends Model
         'c_course',
         'c_partylist',
         'c_position',
-        'c_image'
+        'c_image',
+        'c_elec_id'
     ];
 
 }

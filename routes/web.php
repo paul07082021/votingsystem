@@ -38,7 +38,7 @@ Route::get('position', [PositionController::class, 'index']);
 Route::get('candidates', [CandidatesController::class, 'index']);
 Route::get('dashboard', [DashboardController::class, 'index']);
 Route::get('election', [ElectionController::class, 'index']);
-Route::get('electionresult', [ElectionController::class, 'result']);
+Route::get('electionresult', [VotersController::class, 'result']);
 Route::get('login', [LoginController::class, 'index']);
 
 Route::post('loginadmin', [LoginController::class, 'loginadmin']);
@@ -67,5 +67,9 @@ Route::post('importvoters', [VotersController::class, 'import']);
 Route::get('voterscreen', [VotersController::class, 'voterscreen']);
 
 Route::post('vote', [VotersController::class, 'vote']);
+
+
+Route::post('update', [ElectionController::class, 'update']);
+
 
 

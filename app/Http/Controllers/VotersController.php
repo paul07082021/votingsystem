@@ -15,7 +15,7 @@ use App\Models\PositionModel;
 use App\Models\PartyModel;
 use App\Models\CandidatesModel;
 use App\Models\VoteModel;
-
+use App\Models\ElectionModel;
 
 
 
@@ -28,6 +28,7 @@ class VotersController extends Controller
         $this->candidates = new CandidatesModel;
         $this->admin = new AdminModel;
         $this->voters = new VotersModel;
+        $this->election = new ElectionModel;
         $this->data = array();
     }
 
@@ -132,7 +133,7 @@ class VotersController extends Controller
                             'v_studentname' => $request->input('studentname'), 
                             'v_candidate_voted' => $candidate_id, 
                             'v_position_id' => $position_id, 
-                            'v_partylist_id' => $candidate->c_partylist
+                            'v_partylist_id' => $candidate['c_partylist']
                         ]);
                     }
                 }
@@ -141,6 +142,28 @@ class VotersController extends Controller
         return back();
     }
     
+    public function result()
+    {
+        if (!session()->has('name')) {return redirect(url('login')); }
+        $election = $this->election->get();
+        $elecId = $election->max('elec_id');
+        $this->data['candidates'] = $this->candidates->where('c_elec_id',$elecId)
+        ->join('tbl_position', 'c_position', '=', 'po_id')
+        ->join('tbl_partylist', 'c_partylist', '=', 'par_id')
+        ->select('tbl_candidates.*', 'tbl_position.po_name', 'tbl_partylist.par_name')
+        ->get();
+    
+        foreach($this->data['candidates'] as $key => $data){
+            $res = $this->vote->where('v_candidate_voted', $data->c_id)->count();
+            $this->data['candidates'][$key]->vote_count = $res;
+        }
+    
+        // $this->data['positions'] = $positions = $this->position->get();
+        // $this->data['candidates'] = $this->candidates->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
+         //print_r(json_encode($this->data['vote']));
+      
+        return view('electionresult', $this->data);
+    }
     
     
            

@@ -7,12 +7,14 @@ use App\Models\AdminModel;
 use App\Models\CandidatesModel;
 use App\Models\PositionModel;
 use App\Models\PartyModel;
+use App\Models\ElectionModel;
 
 
 class CandidatesController extends Controller
 {
     public function __construct() {
 
+        $this->election = new ElectionModel;
         $this->position = new PositionModel;
         $this->candidates = new CandidatesModel;
         $this->party = new PartyModel;
@@ -22,7 +24,9 @@ class CandidatesController extends Controller
     public function index()
     {
         if (!session()->has('name')) {return redirect(url('login')); }
-        $this->data['candidates'] = $this->candidates->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
+        $election = $this->election->get();
+        $elecId = $election->max('elec_id');
+        $this->data['candidates'] = $this->candidates->where('c_elec_id',$elecId)->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
         $this->data['position'] = $this->position->get();
         $this->data['party'] = $this->party->get();
         return view('candidates', $this->data);
@@ -38,7 +42,9 @@ class CandidatesController extends Controller
             $party = $request->input('party');
             $position = $request->input('position');
             $img = $request->input('image');
-          
+            $election = $this->election->get();
+            $elecId = $election->max('elec_id');
+
             $addvoters = $this->candidates->insertGetId([
                 'c_name' => $fullname,
                 'c_age' => $age,
@@ -46,7 +52,8 @@ class CandidatesController extends Controller
                 'c_course' => $course,
                 'c_partylist' => $party,
                 'c_position' =>$position,
-                'c_image' =>$img 
+                'c_image' =>$img,
+                'c_elec_id' => $elecId
             ]);
         }
         return back();

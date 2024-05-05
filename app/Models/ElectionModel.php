@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CandidatesModel extends Model
+class ElectionModel extends Model
 {
     public $timestamps = false;
     protected $table = 'tbl_election';

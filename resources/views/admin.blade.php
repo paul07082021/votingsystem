@@ -28,7 +28,6 @@
                                             <tr>
                                                 <th>FullName</th>
                                                 <th>Username</th>
-                                                <th>Password</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -37,7 +36,6 @@
                                             <tr>
                                                 <td>{{$data['admin_fullname']}}</td>
                                                 <td>{{$data['admin_username']}}</td>
-                                                <td>{{$data['admin_password']}}</td>  
                                                 <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update{{$data['admin_id']}}">Update</button>
                                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$data['admin_id']}}">Delete</button></td>                       
                                             </tr>

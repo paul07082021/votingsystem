@@ -54,13 +54,13 @@
                     <!--begin::User Menu Dropdown-->
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img src="https://www.clipartkey.com/mpngs/m/152-1520367_user-profile-default-image-png-clipart-png-download.png" class="user-image rounded-circle shadow" alt="User Image">
+                            <img src="resources/images/school-logo.png" class="user-image rounded-circle shadow" alt="User Image">
                             <span class="d-none d-md-inline"><?php echo session('name'); ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                             <!--begin::User Image-->
                             <li class="user-header text-bg-primary">
-                                <img src="https://www.clipartkey.com/mpngs/m/152-1520367_user-profile-default-image-png-clipart-png-download.png" class="rounded-circle shadow" alt="User Image">
+                                <img src="resources/images/school-logo.png" class="rounded-circle shadow" alt="User Image">
 
                                 <p>
                                 <?php echo session('name'); ?>
@@ -89,7 +89,7 @@
                 <!--begin::Brand Link-->
                 <a href="../../index.html" class="brand-link">
                     <!--begin::Brand Image-->
-                    <img src="assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow">
+                    <img src="resources/images/school-logo.png" alt="AdminLTE Logo" class="brand-image ">
                     <!--end::Brand Image-->
                     <!--begin::Brand Text-->
                     <span class="brand-text fw-light">Voting System</span>

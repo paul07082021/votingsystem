@@ -108,6 +108,17 @@ class VotersController extends Controller
         return back();
     }
 
+    public function delete(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $id = $request->input('id');
+    
+            $this->voters->where('id', $id)->delete();
+        }
+        return back();
+    }
+
+
     public function voterscreen()
     {
         if (!session()->has('name')) {return redirect(url('login')); }

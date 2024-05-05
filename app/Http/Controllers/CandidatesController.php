@@ -65,4 +65,15 @@ class CandidatesController extends Controller
         }
         return back();
     }
+
+    public function delete(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $id = $request->input('id');
+    
+            $this->candidates->where('c_id', $id)->delete();
+        }
+        return back();
+    }
+    
 }

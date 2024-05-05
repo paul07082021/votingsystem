@@ -67,5 +67,17 @@ class PartylistController extends Controller
         }
         return back();
     }
+
+
+    
+    public function delete(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $id = $request->input('id');
+    
+            $this->party->where('par_id', $id)->delete();
+        }
+        return back();
+    }
     
 }

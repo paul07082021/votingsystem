@@ -52,6 +52,8 @@ Route::post('loginvoters', [LoginController::class, 'loginvoters']);
 
 Route::post('addadmin', [AdminController::class, 'add']);
 Route::post('updateadmin', [AdminController::class, 'update']);
+Route::post('deleteadmin', [AdminController::class, 'delete']);
+
 
 Route::post('addparty', [PartylistController::class, 'add']);
 Route::post('updateparty', [PartylistController::class, 'update']);
@@ -73,5 +75,17 @@ Route::get('votersignout', [LoginController::class, 'logoutvoters']);
 Route::post('update', [ElectionController::class, 'update']);
 
 Route::post('votestraight', [VotersController::class, 'votestraight']);
+
+
+Route::post('deleteparty', [PartylistController::class, 'delete']);
+Route::post('deleteposition', [PositionController::class, 'delete']);
+
+Route::post('deletecandidates', [CandidatesController::class, 'delete']);
+
+
+Route::post('deletevoters', [VotersController::class, 'delete']);
+
+
+
 
 

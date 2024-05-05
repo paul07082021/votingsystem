@@ -39,7 +39,7 @@
                                                 <td>{{$data['admin_username']}}</td>
                                                 <td>{{$data['admin_password']}}</td>  
                                                 <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update{{$data['admin_id']}}">Update</button>
-                                                <button type="button" class="btn btn-danger">Delete</button></td>                       
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$data['admin_id']}}">Delete</button></td>                       
                                             </tr>
                                              <?php endforeach; ?>      
                                         </tbody>
@@ -124,5 +124,43 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+<!-- Update Modal -->
+<div class="modal fade" id="delete{{$data['admin_id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">DELETE</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method ="POST" action="deleteadmin">
+      @csrf
+       Are you sure you want to delete?
+      </div>
+      <div class="modal-footer">
+      <input type="hidden" class="form-control" name="id" value="{{$data['admin_id']}}" >
+
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Yes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
 <?php endforeach; ?>      
 @include('footer')

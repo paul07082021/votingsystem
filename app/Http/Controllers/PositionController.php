@@ -51,5 +51,15 @@ class PositionController extends Controller
         }
         return back();
     }
+
+    public function delete(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $id = $request->input('id');
+    
+            $this->position->where('po_id', $id)->delete();
+        }
+        return back();
+    }
     
 }

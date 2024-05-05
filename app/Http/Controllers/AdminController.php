@@ -38,17 +38,28 @@ class AdminController extends Controller
     }
 
     public function update(Request $request)
-{
-    if ($request->isMethod('post')) {
-        $id = $request->input('id');
+    {
+        if ($request->isMethod('post')) {
+            $id = $request->input('id');
 
-        $this->admin->where('admin_id', $id)->update([
-            'admin_fullname' => $request->input('fullname'), 
-            'admin_username' => $request->input('username'), 
-            'admin_password' => $request->input('password'),
-        ]);
+            $this->admin->where('admin_id', $id)->update([
+                'admin_fullname' => $request->input('fullname'), 
+                'admin_username' => $request->input('username'), 
+                'admin_password' => $request->input('password'),
+            ]);
+        }
+        return back();
     }
-    return back();
-}
+
+    public function delete(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $id = $request->input('id');
+    
+            $this->admin->where('admin_id', $id)->delete();
+        }
+        return back();
+    }
+    
 
 }

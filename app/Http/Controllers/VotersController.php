@@ -158,6 +158,14 @@ class VotersController extends Controller
                     }
                 }
             }
+
+            $this->voters->where('id',$request->input('studid'))->update([
+                'stud_isvote' => 1, 
+            ]);
+
+            session()->forget('stud_id');
+                session()->forget('name');
+                return redirect(url('voterslogin'))->with('message', 'Login required!');
             }else{
                 return back();
             }
@@ -185,6 +193,10 @@ class VotersController extends Controller
                 ]);
             }
             if($addvote){
+                $this->voters->where('id',$request->input('studid'))->update([
+                    'stud_isvote' => 1, 
+                ]);
+    
                 session()->forget('stud_id');
                 session()->forget('name');
                 return redirect(url('voterslogin'))->with('message', 'Login required!');
@@ -213,10 +225,6 @@ class VotersController extends Controller
             $this->data['candidates'][$key]->vote_count = $res;
         }
     
-        // $this->data['positions'] = $positions = $this->position->get();
-        // $this->data['candidates'] = $this->candidates->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
-         //print_r(json_encode($this->data['vote']));
-      
         return view('electionresult', $this->data);
     }
     

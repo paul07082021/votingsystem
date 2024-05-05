@@ -13,7 +13,7 @@
                             <!--begin::Small Box Widget 1-->
                             <div class="small-box text-bg-primary">
                                 <div class="inner">
-                                    <h3>150</h3>
+                                    <h3>{{$totalpos}}</h3>
                                     <p>No of Positions</p>
                                 </div>
                                 <a href="#" class="small-box-footer">
@@ -27,7 +27,7 @@
                             <!--begin::Small Box Widget 2-->
                             <div class="small-box text-bg-success">
                                 <div class="inner">
-                                    <h3>53</h3>
+                                    <h3>{{$totalcandidates}}</h3>
 
                                     <p>No of Candidates</p>
                                 </div>
@@ -43,7 +43,7 @@
                             <!--begin::Small Box Widget 3-->
                             <div class="small-box text-bg-warning">
                                 <div class="inner">
-                                    <h3>44</h3>
+                                    <h3>{{$totalvoters}}</h3>
 
                                     <p>Total Voters</p>
                                 </div>
@@ -59,7 +59,7 @@
                             <!--begin::Small Box Widget 4-->
                             <div class="small-box text-bg-danger">
                                 <div class="inner">
-                                    <h3>65</h3>
+                                    <h3>{{$totalvoted}}</h3>
                                     <p>Voter's Voted</p>
                                 </div>
                                 <a href="#" class="small-box-footer">
@@ -72,40 +72,62 @@
                     </div>
                     <!--end::Row-->
                 
-                   
+                   <h4> Votes Tally </h4>       
+    <div class="row">
+        @foreach($positionData as $position)
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">{{ $position['position_name'] }}</h6>
+                <canvas id="{{ str_replace(' ', '_', strtolower($position['position_name'])) }}-bar-chart"></canvas>
+            </div>
+        </div>
+        @endforeach
+    </div>
 
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Single Bar Chart</h6>
-                            <canvas id="bar-chart"></canvas>
-                        </div>
-                    </div>
+    <script>
+        @foreach($positionData as $position)
+        var {{ str_replace(' ', '_', strtolower($position['position_name'])) }}_ctx = $("#{{ str_replace(' ', '_', strtolower($position['position_name'])) }}-bar-chart").get(0).getContext("2d");
+        var {{ str_replace(' ', '_', strtolower($position['position_name'])) }}_candidateData = @json($position['candidates']);
+
+        var {{ str_replace(' ', '_', strtolower($position['position_name'])) }}_candidateNames = {{ str_replace(' ', '_', strtolower($position['position_name'])) }}_candidateData.map(function(item) {
+            return item.name;
+        });
+
+        var {{ str_replace(' ', '_', strtolower($position['position_name'])) }}_voteCounts = {{ str_replace(' ', '_', strtolower($position['position_name'])) }}_candidateData.map(function(item) {
+            return item.vote_count;
+        });
+
+        var {{ str_replace(' ', '_', strtolower($position['position_name'])) }}_chart = new Chart({{ str_replace(' ', '_', strtolower($position['position_name'])) }}_ctx, {
+            type: "bar",
+            data: {
+                labels: {{ str_replace(' ', '_', strtolower($position['position_name'])) }}_candidateNames,
+                datasets: [{
+                    backgroundColor: [
+                        "rgba(0, 156, 255, .7)",
+                        "rgba(0, 156, 255, .6)",
+                        "rgba(0, 156, 255, .5)",
+                        "rgba(0, 156, 255, .4)",
+                        "rgba(0, 156, 255, .3)"
+                    ],
+                    data: {{ str_replace(' ', '_', strtolower($position['position_name'])) }}_voteCounts
+                }]
+            },
+            options: {
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    }
+                }
+        });
+        @endforeach
+    </script>
+
+
+
                    
         </main>
-        <script>
-// Single Bar Chart
-var ctx4 = $("#bar-chart").get(0).getContext("2d");
-    var myChart4 = new Chart(ctx4, {
-        type: "bar",
-        data: {
-            labels: ["Italy", "France", "Spain", "USA", "Argentina"],
-            datasets: [{
-                backgroundColor: [
-                    "rgba(0, 156, 255, .7)",
-                    "rgba(0, 156, 255, .6)",
-                    "rgba(0, 156, 255, .5)",
-                    "rgba(0, 156, 255, .4)",
-                    "rgba(0, 156, 255, .3)"
-                ],
-                data: [55, 49, 44, 24, 15]
-            }]
-        },
-        options: {
-            responsive: true
-        }
-    });
-</script>
-
+       
 
 
 @include('footer')

@@ -14,6 +14,7 @@ class VotersModel extends Model
         'stud_fullname',
         'stud_year',
         'stud_course',
-        'stud_pass'
+        'stud_pass',
+        'stud_isvote'
     ];
 }

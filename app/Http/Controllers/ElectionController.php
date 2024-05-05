@@ -16,6 +16,7 @@ class ElectionController extends Controller
 
     public function index()
     {
+        if (!isset($_SESSION['name'])) {return redirect(url('login')); }
         $this->data['admin'] = $this->admin->get();
         return view('election', $this->data);
     }

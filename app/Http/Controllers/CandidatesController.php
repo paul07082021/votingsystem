@@ -21,8 +21,7 @@ class CandidatesController extends Controller
 
     public function index()
     {
-        //$this->data['candidates'] = $this->candidates->join()->get();
-
+        if (!isset($_SESSION['name'])) {return redirect(url('login')); }
         $this->data['candidates'] = $this->candidates->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
         $this->data['position'] = $this->position->get();
         $this->data['party'] = $this->party->get();

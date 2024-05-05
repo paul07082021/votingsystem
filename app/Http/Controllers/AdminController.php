@@ -16,6 +16,7 @@ class AdminController extends Controller
 
     public function index()
     {
+        if (!isset($_SESSION['name'])) {return redirect(url('/')); }
         $this->data['admin'] = $this->admin->get();
         return view('admin', $this->data);
     }

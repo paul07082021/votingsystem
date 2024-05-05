@@ -19,6 +19,7 @@ class PositionController extends Controller
 
     public function index()
     {
+        if (!isset($_SESSION['name'])) {return redirect(url('login')); }
         $this->data['position'] = $this->position->get();
         return view('position', $this->data);
     }

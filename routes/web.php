@@ -8,6 +8,7 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\CandidatesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ElectionController;
+use App\Http\Controllers\LoginController;
 
 
 /*
@@ -21,9 +22,9 @@ use App\Http\Controllers\ElectionController;
 |
 */
 
-Route::get('login', function () {
-    return view('login');
-});
+// Route::get('/', function () {
+//     return view('login');
+// });
 
 Route::get('login-voters', function () {
     return view('voterscreen');
@@ -38,6 +39,7 @@ Route::get('candidates', [CandidatesController::class, 'index']);
 Route::get('dashboard', [DashboardController::class, 'index']);
 Route::get('election', [ElectionController::class, 'index']);
 Route::get('electionresult', [ElectionController::class, 'result']);
+Route::get('login', [LoginController::class, 'index']);
 
 
 Route::post('addadmin', [AdminController::class, 'add']);

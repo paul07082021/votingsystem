@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2024 at 07:45 AM
+-- Generation Time: May 05, 2024 at 11:58 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -67,8 +67,10 @@ CREATE TABLE `tbl_candidates` (
 --
 
 INSERT INTO `tbl_candidates` (`c_id`, `c_name`, `c_age`, `c_yearlevel`, `c_course`, `c_partylist`, `c_position`, `c_image`) VALUES
-(1, 'adsada', '12', 'adsada', 'adsadsa', 2, 1, 'hahahaha.png'),
-(2, 'dsad', '12', 'adsada', 'adsadasdsa', 4, 1, 'hahahaha.png');
+(1, 'Andrea', '12', '2nd Year', 'BSIT', 5, 1, 'hahahaha.png'),
+(2, 'Mae', '12', '2nd Year', 'BSIT', 4, 2, 'hahahaha.png'),
+(3, 'Jojo', '12', '2nd Year', 'BSIT', 4, 2, 'hahahaha.png'),
+(4, 'John', '12', '1st Year', 'BSIT', 5, 1, 'hahahaha.png');
 
 -- --------------------------------------------------------
 
@@ -100,7 +102,8 @@ CREATE TABLE `tbl_partylist` (
 --
 
 INSERT INTO `tbl_partylist` (`par_id`, `par_name`, `par_logo`, `par_desc`) VALUES
-(4, 'ggg111', 'hahahaha.png', 'asdadasd');
+(4, 'muna bayan', 'hahahaha.png', 'asdadasd'),
+(5, 'bayan muna', 'hahahaha.png', 'asdadasd');
 
 -- --------------------------------------------------------
 
@@ -120,10 +123,38 @@ CREATE TABLE `tbl_position` (
 
 INSERT INTO `tbl_position` (`po_id`, `po_name`, `po_max_vote`) VALUES
 (1, 'Presidents', 1),
-(2, 'Vice President', 1),
+(2, 'Vice President', 2),
 (3, 'Secretary', 1),
 (4, 'Treasurer', 1),
 (5, 'Escorts', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_vote`
+--
+
+CREATE TABLE `tbl_vote` (
+  `v_id` int(11) NOT NULL,
+  `v_election_id` int(11) NOT NULL,
+  `v_studid` int(11) NOT NULL,
+  `v_studentname` varchar(55) NOT NULL,
+  `v_candidate_voted` int(11) NOT NULL,
+  `v_position_id` int(11) NOT NULL,
+  `v_partylist_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_vote`
+--
+
+INSERT INTO `tbl_vote` (`v_id`, `v_election_id`, `v_studid`, `v_studentname`, `v_candidate_voted`, `v_position_id`, `v_partylist_id`) VALUES
+(1, 1, 14, 'Paul A Cayago', 1, 1, 1),
+(2, 1, 14, 'Paul A Cayago', 2, 2, 1),
+(3, 1, 14, 'Paul A Cayago', 3, 2, 1),
+(4, 1, 14, 'Paul A Cayago', 1, 1, 5),
+(5, 1, 14, 'Paul A Cayago', 2, 2, 4),
+(6, 1, 14, 'Paul A Cayago', 3, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -145,7 +176,7 @@ CREATE TABLE `tbl_voters` (
 --
 
 INSERT INTO `tbl_voters` (`id`, `stud_id`, `stud_fullname`, `stud_year`, `stud_course`, `stud_pass`) VALUES
-(14, '192-16892', 'Paul A Cayago', '4TH YEARs', 'BSITs', 'OcJILJoZ');
+(14, 'admin123', 'Paul A Cayago', '4TH YEARs', 'BSITs', 'admin123');
 
 --
 -- Indexes for dumped tables
@@ -182,6 +213,12 @@ ALTER TABLE `tbl_position`
   ADD PRIMARY KEY (`po_id`);
 
 --
+-- Indexes for table `tbl_vote`
+--
+ALTER TABLE `tbl_vote`
+  ADD PRIMARY KEY (`v_id`);
+
+--
 -- Indexes for table `tbl_voters`
 --
 ALTER TABLE `tbl_voters`
@@ -201,7 +238,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_candidates`
 --
 ALTER TABLE `tbl_candidates`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_election`
@@ -213,13 +250,19 @@ ALTER TABLE `tbl_election`
 -- AUTO_INCREMENT for table `tbl_partylist`
 --
 ALTER TABLE `tbl_partylist`
-  MODIFY `par_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `par_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_position`
 --
 ALTER TABLE `tbl_position`
   MODIFY `po_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_vote`
+--
+ALTER TABLE `tbl_vote`
+  MODIFY `v_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_voters`

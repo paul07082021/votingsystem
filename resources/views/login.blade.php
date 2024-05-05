@@ -11,18 +11,22 @@
     <div class = "login-container container-sm">
         <div class="login-left">
             <h2>LOGIN AS ADMINISTRATOR</h2>
+            @if(session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
             <p>Cyber Balot</p>
-            <form>
+            <form method="POST" action="loginadmin">
+                @csrf
                 <div class = "login-item">
                     <label for = "username">Username:</label>
-                    <input type = "text" name = "username" class="form-control"/>
+                    <input type = "text" name = "username" class="form-control" required/>
                 </div>
                 <div class = "login-item">
                     <label for = "password">Password:</label>
-                    <input type = "password" name = "password" class="form-control"/>
+                    <input type = "password" name = "password" class="form-control" required/>
                 </div>
                 <div class = "for-btn">
-                    <button type = "button" class = "btn">SIGN IN</button>
+                    <button type = "submit" class = "btn">SIGN IN</button>
                 </div>
             </form>
         </div>

@@ -24,7 +24,7 @@ class VotersController extends Controller
 
     public function index()
     {
-        if (!isset($_SESSION['name'])) {return redirect(url('login')); }
+        if (!session()->has('name')) {return redirect(url('login')); }
         $this->data['voters'] = $this->voters->get();
         return view('voters', $this->data);
     }

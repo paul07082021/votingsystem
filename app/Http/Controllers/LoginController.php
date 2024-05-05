@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AdminModel;
+use Illuminate\Support\Facades\Redirect;
+
 
 class LoginController extends Controller
 {
@@ -20,18 +22,34 @@ class LoginController extends Controller
         return view('login', $this->data);
     }
 
-    public function update(Request $request)
+    public function loginadmin(Request $request)
     {
         if ($request->isMethod('post')) {
-            $id = $request->input('id');
-
-            $this->admin->where('admin_id', $id)->update([
-                'admin_fullname' => $request->input('fullname'), 
-                'admin_username' => $request->input('username'), 
-                'admin_password' => $request->input('password'),
-            ]);
+            $username = $request->input('username');
+            $password = $request->input('password');
+    
+            $admin = $this->admin->where('admin_username', $username)
+                                 ->where('admin_password', $password)
+                                 ->first();
+    
+            if ($admin) {   
+                session(['admin_id' => $admin['admin_id'],'name' => $admin['admin_fullname'] ]);
+                return redirect(url('dashboard'));
+            } else {
+                return back()->with('error', 'Invalid username or password');
+            }
         }
         return back();
     }
+
+    public function logoutadmin()
+    {
+        session()->forget('admin_id');
+        session()->forget('name');
+        return redirect(url('login'));
+    }
+    
+    
+    
 
 }

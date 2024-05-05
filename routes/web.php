@@ -41,6 +41,10 @@ Route::get('election', [ElectionController::class, 'index']);
 Route::get('electionresult', [ElectionController::class, 'result']);
 Route::get('login', [LoginController::class, 'index']);
 
+Route::post('loginadmin', [LoginController::class, 'loginadmin']);
+Route::get('logoutadmin', [LoginController::class, 'logoutadmin']);
+
+
 
 Route::post('addadmin', [AdminController::class, 'add']);
 Route::post('updateadmin', [AdminController::class, 'update']);

@@ -19,7 +19,7 @@ class PartylistController extends Controller
 
     public function index()
     {
-        if (!isset($_SESSION['name'])) {return redirect(url('login')); }
+        if (!session()->has('name')) {return redirect(url('login')); }
         $this->data['data'] = $this->party->get();
         $this->data['datas'] = $this->party->get();
         return view('partylist', $this->data);

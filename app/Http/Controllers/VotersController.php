@@ -142,6 +142,7 @@ class VotersController extends Controller
             $positions = $request->input('positions');
             $election = $this->election->get();
             $elecId = $election->max('elec_id');
+            if($positions != null){
             foreach ($positions as $position_id => $candidates) {
                 foreach ($candidates as $candidate_id) {
                     $candidate = $this->candidates->where('c_id', $candidate_id)->first();
@@ -157,6 +158,9 @@ class VotersController extends Controller
                     }
                 }
             }
+            }else{
+                return back();
+            }
         }
         return back();
     }
@@ -165,9 +169,11 @@ class VotersController extends Controller
     {
         $election = $this->election->get();
         $elecId = $election->max('elec_id');
+        
         if ($request->isMethod('post')) {
              $partyid = $request->input('party');
-             $candidate = $this->candidates->where('c_id',$partyid)->get();
+             $candidate = $this->candidates->where('c_partylist',$partyid)->get();
+       
             foreach($candidate as $data){
                 $addvote = $this->vote->insertGetId([
                     'v_election_id' => $elecId, 
@@ -178,14 +184,16 @@ class VotersController extends Controller
                     'v_partylist_id' => $data['c_partylist']
                 ]);
             }
+            if($addvote){
+                session()->forget('stud_id');
+                session()->forget('name');
+                return redirect(url('voterslogin'))->with('message', 'Login required!');
+            }
+            
         }
-        return back();
+ 
+
     }
-
-
-
-
-
 
 
     

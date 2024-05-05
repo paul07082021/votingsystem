@@ -50,19 +50,19 @@
         </div>
 
 
-        <form method="POST" action="vote">
+    <form method="POST" action="vote">
     @csrf
     <?php foreach($positions as $pos): ?>
     <!--DITO ILALAGAY YUNG PARA SA <?= $pos['po_name'];?> -->
     <div class="candidate-list bg-body-tertiary">
         <div class="candidate-item">
-            <h5><?= $pos['po_name'];?> Max Vote:<?= $pos['po_max_vote'];?></h5>
+            <h5><?= $pos['po_name'];?></h5>
             <?php foreach($candidates as $candidate): ?>
             <?php if($candidate['c_position'] == $pos['po_id']): ?>
             <div class="candidate form-check">
                 <input class="form-check-input" type="checkbox" name="positions[<?= $pos['po_id']; ?>][]" id="votestraight<?= $candidate['c_id']; ?>" value="<?= $candidate['c_id']; ?>" onchange="limitCheckboxes(this, <?= $pos['po_max_vote']; ?>)">
                 <label class="candidate-label form-check-label" for="votestraight<?= $candidate['c_id']; ?>">
-                    <img src="resources/images/school-logo.png" alt="Voting System">
+                    <img src="storage/app/assets/img/{{$candidate['c_image']}}" alt="Voting System">
                     <p><?= $candidate['c_name']; ?></p>
                     <div class="candidate-details">
                         <p>Party List: <?= $candidate['par_name']; ?></p>
@@ -79,19 +79,16 @@
     <!--END-->
     <?php endforeach; ?>
  
-
-
-        <!--THEN LAHAT NA NG NATIRANG CANDIDATE-->
-
         <input type="hidden" name="studentname" value="<?php echo session('name'); ?>"> 
         <input type="hidden" name="studid" value="<?php echo session('stud_id'); ?>">    
-   
         <div class ="for-view-button">
-            <button type = "submit" class = "btn btn-primary">SUBMIT</button>
+            <button type = "submit" class = "btn btn-primary" hidden>SUBMIT</button>
             <button type = "button" class = "btn btn-success" data-bs-toggle="modal" data-bs-target="#viewModal">VIEW SUMMARY</button>
         </div>
     </div>
-    </form>
+
+
+
     <script>
     function limitCheckboxes(checkbox, max) {
         var checkboxes = document.getElementsByName(checkbox.name);
@@ -106,28 +103,43 @@
         }
     }
 </script>
-  <!-- Modal -->
-  <div class="modal fade" id="viewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="viewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">CANDIDATES</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form>
-            <div class="modal-body">
-            <p>PRESIDENT: ARROYO</p>
-            <p>VICE PRESIDENT: TESTING</p>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">CANDIDATES</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="selectedCandidates">
+                <!-- Selected candidates will appear here -->
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-warning">CHANGE</button>
-            <button type="button" class="btn btn-primary">SUBMIT</button>
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">CHANGE</button>
+                <button type="submit" class="btn btn-primary">SUBMIT</button>
             </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
+</div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $('#viewModal').on('show.bs.modal', function (e) {
+        var selectedCandidates = "";
+        <?php foreach($positions as $pos): ?>
+        selectedCandidates += "<p><?= $pos['po_name']; ?>:</p>";
+        <?php foreach($candidates as $candidate): ?>
+        <?php if($candidate['c_position'] == $pos['po_id']): ?>
+        if ($('#votestraight<?= $candidate['c_id']; ?>').prop('checked')) {
+            selectedCandidates += "<p><?= $candidate['c_name']; ?></p>";
+        }
+        <?php endif; ?>
+        <?php endforeach; ?>
+        <?php endforeach; ?>
+        $("#selectedCandidates").html(selectedCandidates);
+    });
+</script>
+</form>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

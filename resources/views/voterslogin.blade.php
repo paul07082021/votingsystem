@@ -10,6 +10,13 @@
 <body>
     <div class = "login-container container-sm">
         <div class="login-left">
+
+     @if(session('message'))
+    <div class="alert alert-primary">
+        Thank you for voting!!!
+    </div>
+    @endif
+
             <h2>LOGIN AS VOTER</h2>
             <p>Cyber Balot</p>
             @if(session('error'))

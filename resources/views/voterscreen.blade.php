@@ -15,7 +15,7 @@
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             </ul>
-            <span id = "student-desktop" >Student Name</span>
+            <span id = "student-desktop" ><?php echo session('name'); ?></span>
             <a class = "desktop btn" href = "#" class="navbar-text">SIGN OUT</a>
           </div>
           <span id = "student-mobile" >Student Name</span>
@@ -45,32 +45,59 @@
                 </div>
             </form>
         </div>
-        <!--DITO ILALAGAY YUNG PARA SA PRESIDENT -->
-        <div class = "candidate-list bg-body-tertiary">
-            <div class = "candidate-item">     
-            <h5>President</h5>
 
 
-                <form>
-                    <div class="candidate form-check">
-                        <input class="form-check-input" type="radio" name="votestraight" id="votestraight3">
-                        <label class="candidate-label form-check-label" for="votestraight3">
-                        <img src="resources/images/school-logo.png" alt="Voting System">
-                            <p>NICOLE MAMARIL</p>
-                            <div class = "candidate-details">
-                                <p>Party List: KVYO</p>
-                                <p>Age: 22</p>
-                                <p>Year Level: 4th</p>
-                                <p>Course: BSCS</p>
-                            </div>
-                        </label>
-                    </div>
-                </form>
 
-            
+        <?php foreach($positions as $pos): ?>
+    <!--DITO ILALAGAY YUNG PARA SA <?= $pos['po_name'];?> -->
+    <div class="candidate-list bg-body-tertiary">
+        <div class="candidate-item">
+            <h5><?= $pos['po_name'];?> Max Vote:<?= $pos['po_max_vote'];?></h5>
+            <form>
+                <?php foreach($candidates as $candidate): ?>
+                    <?php if($candidate['c_position'] == $pos['po_id']): ?>
+                        <div class="candidate form-check">
+                            <input class="form-check-input" type="checkbox" name="votestraight<?= $pos['po_id']; ?>[]" id="votestraight<?= $candidate['c_id']; ?>" onchange="limitCheckboxes(this, <?= $pos['po_max_vote']; ?>)">
+                            <label class="candidate-label form-check-label" for="votestraight<?= $candidate['c_id']; ?>">
+                                <img src="resources/images/school-logo.png" alt="Voting System">
+                                <p><?= $candidate['c_name']; ?></p>
+                                <div class="candidate-details">
+                                    <p>Party List: <?= $candidate['par_name']; ?></p>
+                                    <p>Age: <?= $candidate['c_age']; ?></p>
+                                    <p>Year Level: <?= $candidate['c_yearlevel']; ?></p>
+                                    <p>Course: <?= $candidate['c_course']; ?></p>
+                                </div>
+                            </label>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </form>
         </div>
-        <!--END-->
+    </div>
+    <!--END-->
+<?php endforeach; ?>
 
+<script>
+    function limitCheckboxes(checkbox, max) {
+        var checkboxes = document.getElementsByName(checkbox.name);
+        var checkedCount = 0;
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                checkedCount++;
+            }
+        }
+        if (checkedCount > max) {
+            checkbox.checked = false;
+        }
+    }
+</script>
+
+
+
+
+   
+
+        <!--THEN LAHAT NA NG NATIRANG CANDIDATE-->
 
 
         <div class ="for-view-button">

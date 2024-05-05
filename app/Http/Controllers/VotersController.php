@@ -108,9 +108,15 @@ class VotersController extends Controller
         if (!session()->has('name')) {return redirect(url('login')); }
         $this->data['voters'] = $this->voters->get();
 
-        $this->data['candidates'] = $this->position->get();
-        print_r(json_encode($this->data['candidates']));
-        die();
+        //$this->data['candidates'] = $this->position->join('tbl_candidates', 'po_id', '=', 'c_position')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
+
+
+        $this->data['positions'] = $positions = $this->position->get();
+        $this->data['candidates'] = $this->candidates->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
+
+
+        // print_r(json_encode($this->data['candidates']));
+        // die();
 
 
         return view('voterscreen', $this->data);

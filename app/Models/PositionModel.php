@@ -11,7 +11,6 @@ class PositionModel extends Model
     protected $fillable = [
         'po_id',
         'po_name',
-        'po_max_vote',
     ];
 
 }

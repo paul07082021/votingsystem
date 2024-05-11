@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AdminModel;
 use App\Models\ElectionModel;
+use App\Models\VotersModel;
 
 
 class ElectionController extends Controller
 {
     public function __construct() {
-
+        $this->voters = new VotersModel;
         $this->election = new ElectionModel;
         $this->admin = new AdminModel;
         $this->data = array();
@@ -57,6 +58,12 @@ class ElectionController extends Controller
         $addpos = $this->election->insertGetId([
             'elec_name' => "New Election, Please change the name", 
         ]);        
+        if($addpos){
+            $sql = $this->voters->where('stud_isvote',1)->get();
+            foreach($sql as $data){
+                $this->voters->where('id', $data->id)->update(['stud_isvote' =>0]); // Update id
+            }
+        }
         return back();
     }
 

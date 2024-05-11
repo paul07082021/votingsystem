@@ -60,7 +60,7 @@
             <?php foreach($candidates as $candidate): ?>
             <?php if($candidate['c_position'] == $pos['po_id']): ?>
             <div class="candidate form-check">
-                <input class="form-check-input" type="checkbox" name="positions[<?= $pos['po_id']; ?>][]" id="votestraight<?= $candidate['c_id']; ?>" value="<?= $candidate['c_id']; ?>" onchange="limitCheckboxes(this, <?= $pos['po_max_vote']; ?>)">
+                <input class="form-check-input" type="checkbox" name="positions[<?= $pos['po_id']; ?>][]" id="votestraight<?= $candidate['c_id']; ?>" value="<?= $candidate['c_id']; ?>" onchange="limitCheckboxes(this, 1)">
                 <label class="candidate-label form-check-label" for="votestraight<?= $candidate['c_id']; ?>">
                     <img src="storage/app/assets/img/{{$candidate['c_image']}}" alt="Voting System">
                     <p><?= $candidate['c_name']; ?></p>

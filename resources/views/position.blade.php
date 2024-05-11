@@ -51,7 +51,6 @@
                                         <thead>
                                             <tr>
                                                 <th>Position</th>
-                                                <th>Maximum Vote</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -59,7 +58,6 @@
                                             <?php foreach($position as $data): ?>
                                             <tr>
                                                 <td>{{$data['po_name']}}</td>
-                                                <td>{{$data['po_max_vote']}}</td>
                                                 <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update{{$data['po_id']}}">Update</button>
                                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$data['po_id']}}">Delete</button></td>                       
                                             </tr>
@@ -90,11 +88,6 @@
                 <label for="fullname" class="form-label">Position</label>
                 <input type="text" class="form-control" name="position" placeholder="Enter Position" required>
             </div>
-            <div class="mb-3">
-                <label for="username" class="form-label">Maximum Vote</label>
-                <input type="number" class="form-control" name="maxvote" placeholder="Enter max vote" required>
-            </div>
-          
         
         </div>
         <div class="modal-footer">
@@ -125,11 +118,6 @@
                 <label for="fullname" class="form-label">Position</label>
                 <input type="text" class="form-control" name="position" value="{{$data['po_name']}}" required>
             </div>
-            <div class="mb-3">
-                <label for="username" class="form-label">Maximum Vote</label>
-                <input type="number" class="form-control" name="maxvote" value="{{$data['po_max_vote']}}" required>
-            </div>
-          
         
         </div>
         <div class="modal-footer">

@@ -29,9 +29,6 @@ class CandidatesController extends Controller
         $this->data['candidates'] = $this->candidates->where('c_elec_id',$elecId)->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
         $this->data['position'] = $this->position->get();
         $this->data['party'] = $this->party->get();
-
-
-
         $this->data['positions'] = $this->position->get();
         $this->data['partys'] = $this->party->get();
         return view('candidates', $this->data);
@@ -48,6 +45,17 @@ class CandidatesController extends Controller
             $position = $request->input('position');
             $election = $this->election->get();
             $elecId = $election->max('elec_id');
+    
+            // Check if the position is already assigned to a candidate in the same party
+            $existingCandidate = $this->candidates
+                ->where('c_position', $position)
+                ->where('c_partylist', $party)
+                ->where('c_elec_id', $elecId)
+                ->first();
+    
+            if ($existingCandidate) {
+                return back()->with('error', 'Position is already assigned to a candidate in the same partylist.');
+            }
     
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -70,6 +78,7 @@ class CandidatesController extends Controller
         }
         return back();
     }
+    
 
     public function delete(Request $request)
     {

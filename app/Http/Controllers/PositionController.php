@@ -28,7 +28,6 @@ class PositionController extends Controller
     {
         if($request->isMethod('post')){
             $position = $request->input('position');
-            $maxvote = $request->input('maxvote');
     
             // Check if the position name already exists
             $existingPosition = $this->position->where('po_name', $position)->first();
@@ -39,7 +38,6 @@ class PositionController extends Controller
     
             $addpos = $this->position->insertGetId([
                 'po_name' => $position, 
-                'po_max_vote' => $maxvote, 
             ]);
     
             if($addpos){
@@ -55,12 +53,10 @@ class PositionController extends Controller
     {
         if($request->isMethod('post')){
             $position = $request->input('position');
-            $maxvote = $request->input('maxvote');
             $id = $request->input('id');
     
             $this->position->where('po_id', $id)->update([
                 'po_name' => $position, 
-                'po_max_vote' => $maxvote, 
             ]);
         }
         return back();

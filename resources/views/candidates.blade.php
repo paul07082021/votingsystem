@@ -9,6 +9,12 @@
 </script>
 <main class="app-main">
             <div class="app-content-header">
+            @if(session('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ session('error') }}
+    </div>
+@endif
+
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
@@ -77,27 +83,27 @@
           @csrf
         <div class="mb-3">
             <label for="fullname" class="form-label">Image</label>
-            <input type="file" class="form-control" name="image" placeholder="Enter your fullname">
+            <input type="file" class="form-control" name="image" placeholder="Enter your fullname" required>
           </div>
           <div class="mb-3">
             <label for="fullname" class="form-label">Fullname</label>
-            <input type="text" class="form-control" name="fullname" placeholder="Enter your fullname">
+            <input type="text" class="form-control" name="fullname" placeholder="Enter your fullname" required>
           </div>
           <div class="mb-3">
             <label for="age" class="form-label">Age</label>
-            <input type="number" class="form-control" name="age" placeholder="Enter your age">
+            <input type="number" class="form-control" name="age" placeholder="Enter your age" required>
           </div>
           <div class="mb-3">
             <label for="year" class="form-label">Year/Level</label>
-            <input type="text" class="form-control" name="year" placeholder="Enter your year/level">
+            <input type="text" class="form-control" name="year" placeholder="Enter your year/level" required>
           </div>
           <div class="mb-3">
             <label for="course" class="form-label">Course</label>
-            <input type="text" class="form-control" name="course" placeholder="Enter your course">
+            <input type="text" class="form-control" name="course" placeholder="Enter your course" required>
           </div>
           <div class="mb-3">
             <label for="position" class="form-label">Partylist</label>
-            <select class="form-select" name="party" aria-label="Default select example">
+            <select class="form-select" name="party" aria-label="Default select example" required>
             <option value="">-- select Partylist --</option>
             <?php foreach($party as $dparty):?>
             <option value="{{$dparty['par_id']}}">{{$dparty['par_name']}}</option>
@@ -106,7 +112,7 @@
           </div>
           <div class="mb-3">
             <label for="position" class="form-label">Position</label>
-            <select class="form-select" name="position" aria-label="Default select example">
+            <select class="form-select" name="position" aria-label="Default select example" required>
             <option selected>-- select position --</option>
             <?php foreach($position as $position):?>
             <option value="{{$position['po_id']}}">{{$position['po_name']}}</option>

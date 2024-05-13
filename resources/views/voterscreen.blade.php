@@ -22,70 +22,72 @@
           <a class = "mobile btn" href = "votersignout" class="navbar-text">SIGN OUT</a>
         </div>
       </nav>
-    <div class ="voters container-fluid">
-        <div class = "voters-header" >
-            <h3>{{$elec['elec_name']}}</h3>
-        </div>
-        <div class = "vote-straight">
-            <h6>VOTE STRAIGHT</h6>
-            <form method="POST" action="votestraight">
-                @csrf
-                <div class = "partylist">
-                    <?php foreach($party as $party):?>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="party" id="votestraight1" value="<?= $party['par_id']?>">
-                        <label class="form-check-label" for="votestraight1">
-                        {{$party['par_name']}}
-                        </label>
-                    </div>
-                    <?php endforeach; ?>
+      <script>
+    function checkCandidates(partyId) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox.getAttribute('data-party') == partyId) {
+                checkbox.checked = true;
+            } else {
+                checkbox.checked = false;
+            }
+        });
+    }
+</script>
 
-                </div>
-                <div>
-                <input type="hidden" name="studentname" value="<?php echo session('name'); ?>"> 
-                  <input type="hidden" name="studid" value="<?php echo session('stud_id'); ?>">    
-                    <button type = "submit" class = "btn btn-primary mt-1">SUBMIT</button>
-                </div>
-            </form>
-        </div>
-
-
-    <form method="POST" action="vote">
-    @csrf
-    <?php foreach($positions as $pos): ?>
-    <!--DITO ILALAGAY YUNG PARA SA <?= $pos['po_name'];?> -->
-    <div class="candidate-list bg-body-tertiary">
-        <div class="candidate-item">
-            <h5><?= $pos['po_name'];?></h5>
-            <?php foreach($candidates as $candidate): ?>
-            <?php if($candidate['c_position'] == $pos['po_id']): ?>
-            <div class="candidate form-check">
-                <input class="form-check-input" type="checkbox" name="positions[<?= $pos['po_id']; ?>][]" id="votestraight<?= $candidate['c_id']; ?>" value="<?= $candidate['c_id']; ?>" onchange="limitCheckboxes(this, 1)">
-                <label class="candidate-label form-check-label" for="votestraight<?= $candidate['c_id']; ?>">
-                    <img src="storage/app/assets/img/{{$candidate['c_image']}}" alt="Voting System">
-                    <p><?= $candidate['c_name']; ?></p>
-                    <div class="candidate-details">
-                        <p>Party List: <?= $candidate['par_name']; ?></p>
-                        <p>Age: <?= $candidate['c_age']; ?></p>
-                        <p>Year Level: <?= $candidate['c_yearlevel']; ?></p>
-                        <p>Course: <?= $candidate['c_course']; ?></p>
-                    </div>
+<div class="voters container-fluid">
+    <div class="voters-header">
+        <h3>{{$elec['elec_name']}}</h3>
+    </div>
+    <div class="vote-straight">
+        <h6>VOTE STRAIGHT</h6>
+        <div class="partylist">
+            <?php foreach($party as $party):?>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="party" id="votestraight<?= $party['par_id']?>" value="<?= $party['par_id']?>" onclick="checkCandidates(<?= $party['par_id']?>)">
+                <label class="form-check-label" for="votestraight<?= $party['par_id']?>">
+                    {{$party['par_name']}}
                 </label>
             </div>
-            <?php endif; ?>
             <?php endforeach; ?>
         </div>
     </div>
-    <!--END-->
-    <?php endforeach; ?>
- 
-        <input type="hidden" name="studentname" value="<?php echo session('name'); ?>"> 
-        <input type="hidden" name="studid" value="<?php echo session('stud_id'); ?>">    
-        <div class ="for-view-button">
-            <button type = "submit" class = "btn btn-primary" hidden>SUBMIT</button>
-            <button type = "button" class = "btn btn-success" data-bs-toggle="modal" data-bs-target="#viewModal">VIEW SUMMARY</button>
+    <form method="POST" action="vote">
+        @csrf
+        <?php foreach($positions as $pos): ?>
+        <!--DITO ILALAGAY YUNG PARA SA <?= $pos['po_name'];?> -->
+        <div class="candidate-list bg-body-tertiary">
+            <div class="candidate-item">
+                <h5><?= $pos['po_name'];?></h5>
+                <?php foreach($candidates as $candidate): ?>
+                <?php if($candidate['c_position'] == $pos['po_id']): ?>
+                <div class="candidate form-check">
+                    <input class="form-check-input" type="checkbox" name="positions[<?= $pos['po_id']; ?>][]" id="votestraight<?= $candidate['c_id']; ?>" value="<?= $candidate['c_id']; ?>" data-party="<?= $candidate['par_id']; ?>" onchange="limitCheckboxes(this, 1)">
+                    <label class="candidate-label form-check-label" for="votestraight<?= $candidate['c_id']; ?>">
+                        <img src="storage/app/assets/img/{{$candidate['c_image']}}" alt="Voting System">
+                        <p><?= $candidate['c_name']; ?></p>
+                        <div class="candidate-details">
+                            <p>Party List: <?= $candidate['par_name']; ?></p>
+                            <p>Age: <?= $candidate['c_age']; ?></p>
+                            <p>Year Level: <?= $candidate['c_yearlevel']; ?></p>
+                            <p>Course: <?= $candidate['c_course']; ?></p>
+                        </div>
+                    </label>
+                </div>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
-    </div>
+        <!--END-->
+        <?php endforeach; ?>
+        <input type="hidden" name="studentname" value="<?php echo session('name'); ?>">
+        <input type="hidden" name="studid" value="<?php echo session('stud_id'); ?>">
+        <div class="for-view-button">
+            <button type="submit" class="btn btn-primary" hidden>SUBMIT</button>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#viewModal">VIEW SUMMARY</button>
+        </div>
+   
+</div>
 
 
 
@@ -115,13 +117,13 @@
                 <!-- Selected candidates will appear here -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">CHANGE</button>
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick=" location.reload();">CHANGE</button>
                 <button type="submit" class="btn btn-primary">SUBMIT</button>
             </div>
         </div>
     </div>
 </div>
-
+</form>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $('#viewModal').on('show.bs.modal', function (e) {

@@ -15,6 +15,32 @@
 <script>
   $(document).ready(function() {
     $('#tbl').DataTable({
+        initComplete: function () {
+            this.api().columns().every(function (index) {
+              if ( index <= 6) {
+
+                    var column = this;
+                    var input = $('<input type="text" placeholder="search" />')
+                        .appendTo($(column.footer()).empty())
+                        .on('keyup change clear', function () {
+                            if (column.search() !== this.value) {
+                                column.search(this.value).draw();
+                            }
+                        });
+                }else{
+                  var column = this;
+                    var input = $('')
+                        .appendTo($(column.footer()).empty())
+                        .on('keyup change clear', function () {
+                            if (column.search() !== this.value) {
+                                column.search(this.value).draw();
+                            }
+                        });
+                }
+               
+         
+            });
+        },
       dom: 'Bfrtip',
       buttons: [
         'excelHtml5',
@@ -24,6 +50,18 @@
     });
   });
 </script>
+<style>
+    table tfoot {
+        display: table-header-group;
+    }
+    table thead tr, table tfoot tr {
+        display: table-row;
+    }
+    .dataTables_filter {
+    display: none;
+}
+
+</style>
 <main class="app-main">
             <div class="app-content-header">
                 <div class="container-fluid">
@@ -55,6 +93,15 @@
                                                 <th>Vote Count</th>
                                             </tr>
                                         </thead>
+                                        <tfoot>
+                                        <th>Partylist</th>
+                                                <th>Position</th>
+                                                <th>Full Name</th>
+                                                <th>Age</th>
+                                                <th>Year/Level</th>
+                                                <th>Course</th>
+                                                <th>Vote Count</th>
+                                        </tfoot>
                                         <tbody>
                                             <?php foreach($candidates as $data): ?>
                                             <tr>

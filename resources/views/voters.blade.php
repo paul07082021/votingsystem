@@ -1,12 +1,65 @@
 @include('navbar')
 <script>
-  jQuery(document).ready(function($) {
-    $('#tbl').DataTable({     
-        
-    }
-    );
-} );
+jQuery(document).ready(function($) {
+    $('#tbl').DataTable({
+        initComplete: function () {
+            this.api().columns().every(function (index) {
+                if (index < 6) {
+                    var column = this;
+                    var input = $('<input type="text" placeholder="search" />')
+                        .appendTo($(column.footer()).empty())
+                        .on('keyup change clear', function () {
+                            if (column.search() !== this.value) {
+                                column.search(this.value).draw();
+                            }
+                        });
+                }else{
+                  var column = this;
+                    var input = $('')
+                        .appendTo($(column.footer()).empty())
+                        .on('keyup change clear', function () {
+                            if (column.search() !== this.value) {
+                                column.search(this.value).draw();
+                            }
+                        });
+                }
+               
+         
+            });
+        }
+    });
+});
 </script>
+  <style>
+    table tfoot {
+        display: table-header-group;
+    }
+    table thead tr, table tfoot tr {
+        display: table-row;
+    }
+    .dataTables_filter {
+    display: none;
+}
+
+.password-toggle {
+    position: relative;
+    display: inline-block;
+  }
+  .password-toggle input[type="password"] {
+    padding-right: 20px;
+    width:150px;
+    border:none;
+  }
+  .password-toggle .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+
+  }
+
+  </style>
 <main class="app-main">
             <div class="app-content-header">
                 <div class="container-fluid">
@@ -26,31 +79,60 @@
                 <div class="container-fluid">
                             <div class="card p-4">
                                 <div class="card-body p-0">
-                                    <table id="tbl" class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Student ID</th>
-                                                <th>Fullname</th>
-                                                <th>Year/Level</th>
-                                                <th>Course</th>
-                                                <th>Voter's Pass</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach($voters as $data): ?>
-                                            <tr>
-                                            <td>{{$data['stud_id']}}</td>
-                                                <td>{{$data['stud_fullname']}}</td>
-                                                <td>{{$data['stud_year']}}</td>
-                                                <td>{{$data['stud_course']}}</td>  
-                                                <td>{{$data['stud_pass']}}</td>  
-                                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update{{$data['id']}}">Update</button>
-                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$data['id']}}">Delete</button></td>                       
-                                            </tr>
-                                             <?php endforeach; ?>      
-                                        </tbody>
-                                    </table>
+                                <table id="tbl" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <th>Fullname</th>
+                                        <th>Year/Level</th>
+                                        <th>Course</th>
+                                        <th>Voter's Pass</th>
+                                        <th>Voter's Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <th>Fullname</th>
+                                        <th>Year/Level</th>
+                                        <th>Course</th>
+                                        <th>Voter's Pass</th>
+                                        <th>Voter's Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                 <?php foreach($voters as $data): ?>
+                                <tr>
+                                    <td>{{$data['stud_id']}}</td>
+                                    <td>{{$data['stud_fullname']}}</td>
+                                    <td>{{$data['stud_year']}}</td>
+                                    <td>{{$data['stud_course']}}</td>  
+                                    <td>
+                                        <div class="password-toggle">
+                                            <input type="password" id="password{{$data['id']}}" placeholder="Enter your password" value="{{$data['stud_pass']}}" style="border:none;" readonly>
+                                            <span class="toggle-password" onclick="togglePassword('password{{$data['id']}}')"><i class="fas fa-eye"></i></span>
+                                        </div>
+                                    </td>  
+                                    <td>
+                                        @if($data['stud_isvote'] == 1)
+                                            VOTED
+                                        @else
+                                            PENDING
+                                        @endif
+                                    </td>  
+                                    <td>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update{{$data['id']}}">Update</button>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$data['id']}}">Delete</button>
+                                    </td>                       
+                                </tr>
+                            <?php endforeach; ?>
+
+  
+                                </tbody>
+                            </table>
+
                             </div>
                         </div>
                         </div>
@@ -59,7 +141,20 @@
                    
         </main>
 
-
+        <script>
+    function togglePassword(passwordFieldId) {
+        var passwordField = document.getElementById(passwordFieldId);
+        var toggleButton = passwordField.nextElementSibling;
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleButton.innerHTML = '<i class="fas fa-eye-slash"></i>';
+        } else {
+            passwordField.type = "password";
+            toggleButton.innerHTML = '<i class="fas fa-eye"></i>';
+        }
+    }
+</script>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -39,7 +39,7 @@
     <div class="voters-header">
         <h3>{{$elec['elec_name']}}</h3>
     </div>
-    <div class="vote-straight">
+    <div class="vote-straight" style="font-size:2vh;">
         <h6>VOTE STRAIGHT</h6>
         <div class="partylist">
             <?php foreach($party as $party):?>
@@ -56,17 +56,17 @@
         @csrf
         <?php foreach($positions as $pos): ?>
         <!--DITO ILALAGAY YUNG PARA SA <?= $pos['po_name'];?> -->
-        <div class="candidate-list bg-body-tertiary">
+        <div class="candidate-list bg-body-tertiary" >
             <div class="candidate-item">
-                <h5><?= $pos['po_name'];?></h5>
+                <h4><?= $pos['po_name'];?></h4>
                 <?php foreach($candidates as $candidate): ?>
                 <?php if($candidate['c_position'] == $pos['po_id']): ?>
                 <div class="candidate form-check">
                     <input class="form-check-input" type="checkbox" name="positions[<?= $pos['po_id']; ?>][]" id="votestraight<?= $candidate['c_id']; ?>" value="<?= $candidate['c_id']; ?>" data-party="<?= $candidate['par_id']; ?>" onchange="limitCheckboxes(this, 1)">
-                    <label class="candidate-label form-check-label" for="votestraight<?= $candidate['c_id']; ?>">
+                    <label class="candidate-label form-check-label" for="votestraight<?= $candidate['c_id']; ?>" style="font-size:2vh;">
                         <img src="storage/app/assets/img/{{$candidate['c_image']}}" alt="Voting System">
                         <p><?= $candidate['c_name']; ?></p>
-                        <div class="candidate-details">
+                        <div class="candidate-details" style="font-size:2vh;">
                             <p>Party List: <?= $candidate['par_name']; ?></p>
                             <p>Age: <?= $candidate['c_age']; ?></p>
                             <p>Year Level: <?= $candidate['c_yearlevel']; ?></p>

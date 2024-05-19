@@ -64,7 +64,7 @@ class VotersController extends Controller
         $request->validate([
             'excel_file' => 'required|mimes:xlsx,xls'
         ]);
-        $password = Str::random(8); 
+       
         $file = $request->file('excel_file');
         $spreadsheet = IOFactory::load($file);
         $sheet = $spreadsheet->getActiveSheet();
@@ -72,6 +72,7 @@ class VotersController extends Controller
         $highestColumn = $sheet->getHighestColumn();
         $data = [];
         for ($row = 2; $row <= $highestRow; $row++) {
+            $password = Str::random(8); 
             $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
             $addvoters = $this->voters->insertGetId([
                 'stud_id' => $rowData[0][0],

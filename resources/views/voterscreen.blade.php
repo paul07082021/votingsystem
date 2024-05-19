@@ -129,11 +129,11 @@
     $('#viewModal').on('show.bs.modal', function (e) {
         var selectedCandidates = "";
         <?php foreach($positions as $pos): ?>
-        selectedCandidates += "<p><?= $pos['po_name']; ?>:</p>";
+        selectedCandidates += "<p ><?= $pos['po_name']; ?>:</p>";
         <?php foreach($candidates as $candidate): ?>
         <?php if($candidate['c_position'] == $pos['po_id']): ?>
         if ($('#votestraight<?= $candidate['c_id']; ?>').prop('checked')) {
-            selectedCandidates += "<p><?= $candidate['c_name']; ?></p>";
+            selectedCandidates += "<p style='color:blue;'><?= $candidate['c_name']; ?></p>";
         }
         <?php endif; ?>
         <?php endforeach; ?>
@@ -141,7 +141,6 @@
         $("#selectedCandidates").html(selectedCandidates);
     });
 </script>
-</form>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

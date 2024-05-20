@@ -116,6 +116,13 @@
                                 <p>Administrator</p>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="yearlevel" class="nav-link">
+                                <i class="nav-icon fa-regular fa-user text-info"></i>
+                                <p>Year/Level</p>
+                            </a>
+                        </li>
                       
                         <li class="nav-item">
                             <a href="partylist" class="nav-link">

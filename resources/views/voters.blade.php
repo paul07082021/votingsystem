@@ -179,7 +179,12 @@ jQuery(document).ready(function($) {
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Year/Level</label>
-            <input type="text" class="form-control" name="year" placeholder="please enter" required>
+            <select class="form-select" name="year" aria-label="Default select example">
+                <option value="" selected>--please select--</option>
+                @foreach($year as $year)
+                <option value="{{$year['year_level']}}">{{$year['year_level']}}</option>
+                @endforeach
+              </select>          
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Course</label>
@@ -238,7 +243,7 @@ jQuery(document).ready(function($) {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Voters</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Update Voters</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -257,7 +262,12 @@ jQuery(document).ready(function($) {
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Year/Level</label>
-            <input type="text" class="form-control" name="year" value="{{$data['stud_year']}}" required>
+            <select class="form-select" name="year" aria-label="Default select example">
+                <option value="{{$data['stud_year']}}" selected>{{$data['stud_year']}}</option>
+                @foreach($yearupdate as $year)
+                <option value="{{$year['year_level']}}">{{$year['year_level']}}</option>
+                @endforeach
+              </select>          
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Course</label>

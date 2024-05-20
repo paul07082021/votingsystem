@@ -28,6 +28,10 @@ class PositionController extends Controller
     {
         if($request->isMethod('post')){
             $position = $request->input('position');
+
+            $mult = $request->input('multiple');
+            $multiple = $mult == 1 ? 1 : null;
+
     
             // Check if the position name already exists
             $existingPosition = $this->position->where('po_name', $position)->first();
@@ -38,6 +42,7 @@ class PositionController extends Controller
     
             $addpos = $this->position->insertGetId([
                 'po_name' => $position, 
+                'po_multiple' => $multiple
             ]);
     
             if($addpos){
@@ -54,9 +59,13 @@ class PositionController extends Controller
         if($request->isMethod('post')){
             $position = $request->input('position');
             $id = $request->input('id');
-    
+
+            $mult = $request->input('multiple');
+            $multiple = $mult == 1 ? 1 : null;
+
             $this->position->where('po_id', $id)->update([
                 'po_name' => $position, 
+                'po_multiple' => $multiple
             ]);
         }
         return back();

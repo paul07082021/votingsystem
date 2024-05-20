@@ -16,8 +16,7 @@ use App\Models\PartyModel;
 use App\Models\CandidatesModel;
 use App\Models\VoteModel;
 use App\Models\ElectionModel;
-
-
+use App\Models\YearModel;
 
 class VotersController extends Controller
 {
@@ -30,6 +29,7 @@ class VotersController extends Controller
         $this->voters = new VotersModel;
         $this->election = new ElectionModel;
         $this->party = new PartyModel;
+        $this->year = new YearModel;
         $this->data = array();
     }
 
@@ -37,6 +37,9 @@ class VotersController extends Controller
     {
         if (!session()->has('name')) {return redirect(url('login')); }
         $this->data['voters'] = $this->voters->get();
+        $this->data['year'] = $this->year->get();
+        $this->data['yearupdate'] = $this->year->get();
+
         return view('voters', $this->data);
     }
 
@@ -132,8 +135,7 @@ class VotersController extends Controller
         $this->data['voters'] = $this->voters->get();
         $this->data['positions'] = $positions = $this->position->get();
         $this->data['candidates'] = $this->candidates->where('c_elec_id', $elecId)->join('tbl_position', 'c_position', '=', 'po_id')->join('tbl_partylist', 'c_partylist', '=', 'par_id')->get();
-        // print_r(json_encode($this->data['candidates']));
-        // die();
+    
         return view('voterscreen', $this->data);
     }
     

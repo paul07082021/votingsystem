@@ -9,7 +9,7 @@ use App\Http\Controllers\CandidatesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ElectionController;
 use App\Http\Controllers\LoginController;
-
+use App\Http\Controllers\YearController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +29,12 @@ use App\Http\Controllers\LoginController;
 Route::get('login-voters', function () {
     return view('voterscreen');
 });
+
+Route::get('yearlevel', [YearController::class, 'index']);
+Route::post('addyear', [YearController::class, 'add']);
+Route::post('updateyear', [YearController::class, 'update']);
+Route::post('deleteyear', [YearController::class, 'delete']);
+
 
 
 Route::get('admin', [AdminController::class, 'index']);

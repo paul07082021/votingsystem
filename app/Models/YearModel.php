@@ -4,14 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PositionModel extends Model
+class YearModel extends Model
 {
     public $timestamps = false;
-    protected $table = 'tbl_position';
+    protected $table = 'tbl_yearlevel';
     protected $fillable = [
-        'po_id',
-        'po_name',
-        'po_multiple'
+        'id',
+        'year_level',
     ];
-
 }

@@ -62,6 +62,8 @@ class LoginController extends Controller
     {
         session()->forget('stud_id');
         session()->forget('name');
+        session()->forget('year');
+        session()->forget('course');
         return redirect(url('voterslogin'));
     }
     
@@ -80,7 +82,7 @@ class LoginController extends Controller
                     return back()->with('error', 'You have already voted.');
 
                 }else{
-                    session(['stud_id' => $admin['id'],'name' => $admin['stud_fullname'] ]);
+                    session(['stud_id' => $admin['id'],'name' => $admin['stud_fullname'],'year' => $admin['stud_year'],'course' => $admin['stud_course']  ]);
                     return redirect(url('voterscreen'));
                 }
                 

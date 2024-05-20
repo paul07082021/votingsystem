@@ -53,33 +53,45 @@
         </div>
     </div>
     <form method="POST" action="vote">
-        @csrf
-        <?php foreach($positions as $pos): ?>
-        <!--DITO ILALAGAY YUNG PARA SA <?= $pos['po_name'];?> -->
-        <div class="candidate-list bg-body-tertiary" >
-            <div class="candidate-item">
-                <h4><?= $pos['po_name'];?></h4>
-                <?php foreach($candidates as $candidate): ?>
-                <?php if($candidate['c_position'] == $pos['po_id']): ?>
-                <div class="candidate form-check">
-                    <input class="form-check-input" type="checkbox" name="positions[<?= $pos['po_id']; ?>][]" id="votestraight<?= $candidate['c_id']; ?>" value="<?= $candidate['c_id']; ?>" data-party="<?= $candidate['par_id']; ?>" onchange="limitCheckboxes(this, 1)">
-                    <label class="candidate-label form-check-label" for="votestraight<?= $candidate['c_id']; ?>" style="font-size:2vh;">
-                        <img src="storage/app/assets/img/{{$candidate['c_image']}}" alt="Voting System">
-                        <p><?= $candidate['c_name']; ?></p>
-                        <div class="candidate-details" style="font-size:2vh;">
-                            <p>Party List: <?= $candidate['par_name']; ?></p>
-                            <p>Age: <?= $candidate['c_age']; ?></p>
-                            <p>Year Level: <?= $candidate['c_yearlevel']; ?></p>
-                            <p>Course: <?= $candidate['c_course']; ?></p>
-                        </div>
-                    </label>
-                </div>
-                <?php endif; ?>
-                <?php endforeach; ?>
+    @csrf
+    <?php foreach($positions as $pos): ?>
+    <div class="candidate-list bg-body-tertiary">
+        <div class="candidate-item">
+            <h4><?= $pos['po_name']; ?></h4>
+            <?php foreach($candidates as $candidate): ?>
+            <?php if($candidate['c_position'] == $pos['po_id']): ?>
+            <div class="candidate form-check">
+            <?php 
+                    $userCourse = strtolower(session('course'));
+                    $userYear = strtolower(session('year'));
+                    $candidateYear = strtolower($candidate['c_yearlevel']);
+                    $candidateCourse = strtolower($candidate['c_course']);
+                    $isSameYearAndCourse = ($userYear == $candidateYear && $userCourse == $candidateCourse);
+                ?>
+                <?php if($pos['po_multiple'] == 1 && $isSameYearAndCourse){ ?>
+                    <input class="form-check-input" type="radio" name="positions[<?= $pos['po_id']; ?>][]" id="votestraight<?= $candidate['c_id']; ?>" value="<?= $candidate['c_id']; ?>" data-party="<?= $candidate['par_id']; ?>" onchange="limitCheckboxes(this, 1)">
+                <?php } elseif ($pos['po_multiple'] == 1 && !$isSameYearAndCourse) { ?>
+                    <input class="form-check-input" type="radio" name="positions[<?= $pos['po_id']; ?>][]" id="votestraight<?= $candidate['c_id']; ?>" value="<?= $candidate['c_id']; ?>" data-party="<?= $candidate['par_id']; ?>" disabled>
+                <?php } else { ?>
+                    <input class="form-check-input" type="radio" name="positions[<?= $pos['po_id']; ?>][]" id="votestraight<?= $candidate['c_id']; ?>" value="<?= $candidate['c_id']; ?>" data-party="<?= $candidate['par_id']; ?>" onchange="limitCheckboxes(this, 1)">
+                <?php } ?>
+                <label class="candidate-label form-check-label" for="votestraight<?= $candidate['c_id']; ?>" style="font-size:2vh;">
+                    <img src="storage/app/assets/img/{{$candidate['c_image']}}" alt="Voting System">
+                    <p><?= $candidate['c_name']; ?></p>
+                    <div class="candidate-details" style="font-size:2vh;">
+                        <p>Party List: <?= $candidate['par_name']; ?></p>
+                        <p>Age: <?= $candidate['c_age']; ?></p>
+                        <p>Year Level: <?= $candidate['c_yearlevel']; ?></p>
+                        <p>Course: <?= $candidate['c_course']; ?></p>
+                    </div>
+                </label>
             </div>
+            <?php endif; ?>
+            <?php endforeach; ?>
         </div>
-        <!--END-->
-        <?php endforeach; ?>
+    </div>
+    <!--END-->
+    <?php endforeach; ?>
         <input type="hidden" name="studentname" value="<?php echo session('name'); ?>">
         <input type="hidden" name="studid" value="<?php echo session('stud_id'); ?>">
         <div class="for-view-button">
